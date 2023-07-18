@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Flávia E. Rius">
+
+<title>Flávia E. Rius - Understand Linear Regression Results in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Flávia E. Rius</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/flaviaerius" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/flaviaerius" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Understand Linear Regression Results in R</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data science</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">machine learning</div>
+                <div class="quarto-category">supervised learning</div>
+                <div class="quarto-category">regression</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Flávia E. Rius </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>In this post I will write about the statistics and metrics of linear regression for you to finally understand all of the output from <code>summary()</code> R function applied to an <code>lm()</code> object, in a very practical way.</p>
+<p><strong>Disclaimer</strong>: I am <strong>NOT</strong> a statistician, so to all statisticians out there, I apologize for any misused term. My intention here is just to let people interpret their own regression models and <strong>understand</strong> what is going on with their data in a practical way.</p>
+<section id="about-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="about-linear-regression">About linear regression</h2>
+<p>There are two main uses of linear regression: statistical inference and prediction.</p>
+<p>In the statistical inference line, a <strong>linear regression</strong> is performed to find a relationship of a dependent continuous variable and one or more variables of any type (continuous or categorical). You can, then, <strong>explain</strong> a relationship between variables.</p>
+<p>As a predictive point of view, regression is a part of <strong>supervised learning</strong>, a type of <strong>machine learning</strong>, and can be used to predict new data based on the relationship found between two variables.</p>
+<p>These two approaches are not mutually exclusive, they can be used together. You can both explain the relationship between variables and use your model to predict with new data input.</p>
+<p>For more insights on this difference, I recommend <a href="https://www.nature.com/articles/nmeth.4642.pdf?ssp=1&amp;darkschemeovr=1&amp;setlang=pt-BR&amp;safesearch=moderate">this brief Nature discussion and example on RNA-seq data</a>, especially the first four paragraphs.</p>
+<p>Concerning the prior assumptions to perform a linear model, such as <strong>linearity</strong> and <strong>normality</strong> of the variables, mainly, this is a very discussed topic among statisticians and data scientists. In the <strong>machine learning</strong> side, the assumptions do not matter that much if the model has a good application in predicting the variable of interest. And for the inference side, the assumptions are more important for the model inference to be correct, but they are not written in stone. For example, <a href="https://www.annualreviews.org/doi/pdf/10.1146/annurev.publhealth.23.100901.140546">not normally distributed variables might work well in a t-test or linear regression for a large sample size</a>. At the same time, to perform linear regressions on gene expression data from RNA-seq, there are several transformations made in the data so it can be normal, linear, and homoskedastic.</p>
+<p>As I said, it is a very much discussed topic and I suggest that you read more about your area of application to decide if you should check for assumptions or not. I won’t dive into assumptions in this post.</p>
+</section>
+<section id="running-the-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-linear-regression">Running the linear regression</h2>
+<p>First of all, we need an analysis.</p>
+<p>We’ll use the most classic dataset of R: <code>mtcars</code>. It contains measures as weight, miles per gallon, number of cylinders, etc, of 32 models of cars from 1974. You can explore the dataset more by typing <code>?mtcars</code> in your R console.</p>
+<p>Let’s check the variables distribution overall:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg             cyl             disp             hp       
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+      drat             wt             qsec             vs        
+ Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+ 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+ Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+ Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+ 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+ Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+       am              gear            carb      
+ Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+ 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+ Median :0.0000   Median :4.000   Median :2.000  
+ Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+ 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+ Max.   :1.0000   Max.   :5.000   Max.   :8.000  </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>They are all numeric, but <code>am</code> and <code>vs</code> seem to be binary, and some seem to be categorical, as <code>carb</code> and <code>cyl</code>.</p>
+<p>In our analysis to demonstrate the linear regression metrics and statistics, our <strong>question</strong> will be:</p>
+<blockquote class="blockquote">
+<p>Does the weight of a car influences in how many miles it can go per gallon of gas?</p>
+</blockquote>
+<p>To answer that, we will use the predictor (independent variable) <strong>weight</strong> or <code>wt</code> and the predicted (dependent variable) <strong>miles per gallon</strong> or <code>mpg</code>.</p>
+<p>Let’s fit the model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>To obtain all statistics and some of the metrics for our model, we need to use the function <code>summary()</code> in R.</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ wt, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.5432 -2.3647 -0.1252  1.4096  6.8727 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.046 on 30 degrees of freedom
+Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
+F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Okay, so we have this ocean of information and how can we answer our question? p value is low, and all three stars for coefficients, this seems nice.</p>
+<p>Let’s see one by one, by order of appearance in the output of <code>summary(fit)</code>.</p>
+</section>
+<section id="metrics-and-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="metrics-and-statistics">Metrics and statistics</h2>
+<p>While <strong>metrics</strong> are the values to measure performance of the overall model, <strong>statistics</strong> are the coefficients of hypothesis tests and estimates of each variable. Below they will be explained.</p>
+<p>To visualize some parts of the explanation, the linear regression plot will be illustrated below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="residuals" class="level3">
+<h3 class="anchored" data-anchor-id="residuals"><strong>1. Residuals</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># -4.5432 -2.3647 -0.1252  1.4096  6.8727 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>“Residual” was a term invented because an executive of a drug industry didn’t want to admit having “error” in their data when sending it to FDA (you can find this info on page 239 of the book <a href="https://www.goodreads.com/book/show/106350.The_Lady_Tasting_Tea?from_search=true&amp;from_srp=true&amp;qid=x3RuL9nMWd&amp;rank=1">The Lady Tasting Tea</a>). So yes, these are <strong>the “errors” of your model</strong>. Not that there is something wrong, but the fitted line is not perfect, there are deviations from it to your real data because other factors and randomness affect your predicted variable (<code>mpg</code>) too. Those deviations are the residuals.</p>
+<p>They are calculated subtracting the predicted data from the observed data. In our case, predicted (obtained using the model) miles per gallon minus observed (from <code>mtcars</code>) miles per gallon.</p>
+<p>To see all of them, instead of a summary, run:</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resid</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
+         -2.2826106          -0.9197704          -2.0859521           1.2973499 
+  Hornet Sportabout             Valiant          Duster 360           Merc 240D 
+         -0.2001440          -0.6932545          -3.9053627           4.1637381 
+           Merc 230            Merc 280           Merc 280C          Merc 450SE 
+          2.3499593           0.2998560          -1.1001440           0.8668731 
+         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
+         -0.0502472          -1.8830236           1.1733496           2.1032876 
+  Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
+          5.9810744           6.8727113           1.7461954           6.4219792 
+      Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
+         -2.6110037          -2.9725862          -3.7268663          -3.4623553 
+   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
+          2.4643670           0.3564263           0.1520430           1.2010593 
+     Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
+         -4.5431513          -2.7809399          -3.2053627          -1.0274952 </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>It is possible to <strong>explore the residuals</strong> checking them for some assumptions of a linear regression, and hidden patterns in the data. This is a very long topic, so it will be left to another post.</p>
+</section>
+<section id="coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="coefficients"><strong>2. Coefficients</strong></h3>
+<p>Overall, the coefficients contain information about the predictors of your dependent variable. Below you can see a detailed explanation.</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># wt           -5.3445     0.5591  -9.559 1.29e-10 ***</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>a. Intercept</strong></p>
+<p>Intercept is the mean value of y when x is 0 in our model. In our example, how many miles a gallon would make in average for a car with <strong>zero lbs</strong>. Also represented as β0 in the linear regression equation:</p>
+<p><strong>y = β0 + β1x + ε</strong></p>
+<p>In our example it makes no sense at all. There is no car with 0 lbs. Therefore we can just ignore it and interpret the coefficient of interest, β1.</p>
+<p><strong>b. wt</strong></p>
+<p>Represented by the variable name, this is the angular coefficient, β1. It represents the slope of the line in the linear regression plot. This is how much <strong>y</strong> increases or decreases with the increase of <strong>one unit of x</strong>. In our example, it is how many <strong>miles per gallon</strong> <em>decreases</em> (estimate is negative = -5.3) with the <em>increase</em> of each <strong>1000 lb weight</strong> (unit of measure of wt) of the car.</p>
+<p>The columns for the coefficients are:</p>
+<p><strong>I. Estimate</strong></p>
+<p>Estimates are the values per se of β0 (<code>Intercept</code>) and β1 (<code>wt</code>). The explanation of them is above.</p>
+<p><strong>II. Std Error</strong></p>
+<p>Standard Error is the deviation of the estimate from its real value. The smallest this value is, more precise the estimate is. It tends to be smaller if you have a big number of observations, since it is the standard deviation divided by n.&nbsp;</p>
+<p><strong>III. t value</strong></p>
+<p>This is the value of t in the Student’s t test for one sample. The alternative hypothesis tested is: is your estimate different than zero?, which relies on the distribution of your data being a t distribution, which is very close to a normal distribution. It is calculated by Estimate/Std Error.</p>
+<p><strong>IV. Pr(&gt;|t|)</strong></p>
+<p>This is the <strong>p value</strong> for the t test applied to your estimate. If it is less than the considered alpha - the error you choose to accept (generally 0.05) - then you can say your estimates are very likely to be significant.</p>
+</section>
+<section id="signif.-codes" class="level3">
+<h3 class="anchored" data-anchor-id="signif.-codes"><strong>3. Signif. codes</strong></h3>
+<p>This is just a legend for what the asterisks and dot mean concerning level of significance for the p values.</p>
+</section>
+<section id="degrees-of-freedom" class="level3">
+<h3 class="anchored" data-anchor-id="degrees-of-freedom"><strong>4. Degrees of freedom</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 30 degrees of freedom</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Degrees of freedom</strong> (<strong>DF</strong>) are how many units of your data are “free to vary”.</p>
+<p>Practically, this is how many observations you have minus the number of estimated parameters used in your model (in this case, intercept and weight). Which means that it is directly proportional to the number of samples, and inversely proportional to the number of parameters and variables in your analysis. Degrees of freedom are crucial to determine your t distribution shape and what will be the significance (p value) of the estimates.</p>
+</section>
+<section id="residual-standard-error" class="level3">
+<h3 class="anchored" data-anchor-id="residual-standard-error"><strong>5. Residual standard error</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual standard error: 3.046</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Residual standard error</strong> (<strong>RSE</strong>) is the average deviation of predicted values (from the model) from observed values (the ones in your dataset).</p>
+<p>It can be calculated with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="dv">30</span> <span class="co"># degrees of freedom</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((y <span class="sc">-</span> y_hat)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.045882</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Statistically speaking, it is the estimate of standard deviation of predicted values from real values; a measure of variation around the regression line.</p>
+<p>Confidence intervals around predicted values are generated using the <strong>RSE</strong>, therefore it is an important metric of your model. Large <strong>RSE</strong> can generate inaccurate predictions.</p>
+</section>
+<section id="multiple-r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-r-squared"><strong>6. Multiple R-squared</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple R-squared:  0.7528</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>This is the famous R squared (R²). The proportion of variance of your dependent variable, y, which is explained by your model. Simplifying: proportion of variance explained.</p>
+<p>Since it is a proportion, its value is between 0 and 1.</p>
+<p>Our model explains 75% of variance in miles per gallon.</p>
+<p>This does not mean that if you have an R² = 0.3 for example you have a poor regression analysis. Some variables are just partly explained by the predictor analyzed, and if your intention is to interpret the influence of a predictor in a response variable, it may be useful even with a low variance explained. This happens in genomics, with polygenic scores for example, when your analyzed genetics explains only a part of a trait or disease, while the rest is explained by other factors such as environment.</p>
+<p>Also, this is not the best way to analyze if your model is good or not. <code>RMSE</code> (Root Mean Squared Error), which is just squaring residuals, averaging them, and getting the square root, is generally a better way to evaluate whether you have a less prone to errors model. The smallest the RMSE, the better your model is.</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>RMSE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>(<span class="fu">resid</span>(fit)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>RMSE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.949163</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>That means that in average there is an error of 2.9 miles per gallon in our model.</p>
+<p>Have in mind what my boss always repeats: “All models are wrong, but some are useful”, a classical phrase by George Box.</p>
+</section>
+<section id="adjusted-r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-r-squared"><strong>7. Adjusted R-Squared</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjusted R-squared:  0.7446</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>When there is more than one predictor in your linear regression (multiple linear regression), there is always an increase in R² independent of increase in variance explained, due to just the addittion of a new predictor. Therefore the R² value is adjusted for that.</p>
+<p>To compare multiple linear regression models, or models with different number of predictors, it is recommended to check adjusted R-squared instead of multiple R-squared for variance explained.</p>
+</section>
+<section id="f-statistic" class="level3">
+<h3 class="anchored" data-anchor-id="f-statistic"><strong>8. F-statistic</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># F-statistic: 91.38 on 1 and 30 DF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>F is the statistic from the F-test performed in your model. Basically the F value is used to see if there is any relationship between the response and predictors in a <strong>multiple linear regression</strong>. In the example discussed here, a simple linear regression, the estimate β1 = 0 is a better way to tell that there is no relationship between the response and predictor.</p>
+</section>
+<section id="p-value" class="level3">
+<h3 class="anchored" data-anchor-id="p-value"><strong>9. p-value</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p-value: 1.294e-10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>This is the F-test p-value, which tells you if your F-test is significant. A p-value below the alpha you choose (for example, 0.05) means there is a high chance that at least one of your predictors is significantly associated with your dependent variable. It is more used for multiple regression models, which can be approached in another blog post.</p>
+</section>
+</section>
+<section id="interpretation-concerns" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-concerns">Interpretation concerns</h2>
+<p>Some transformations can be used in the linear regression to make your model more interpretable.</p>
+<p>For example, let’s say that, as me, you are not from a country that uses <em>lbs</em> as a weight metric, neither <em>miles</em> for a distance one, or <em>gallons</em> for a volume one.</p>
+<p>Instead, you would like to interpret your model using <em>kilograms</em>, <em>kilometers</em>, and <em>liters</em>. Is this possible?</p>
+<p><strong>Yes!</strong></p>
+<p>Using the <code>I()</code> operator around the terms of the linear regression, just so you can transform from inside of the <code>lm()</code> function, we can transform the terms and get the proper interpretation. See below:</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>miles_to_kilometers <span class="ot">&lt;-</span> <span class="fl">1.61</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>gallons_to_liters <span class="ot">&lt;-</span> <span class="fl">3.79</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>lb_to_kg <span class="ot">&lt;-</span> <span class="fl">0.45</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>fit_not_english <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">I</span>(mpg<span class="sc">*</span>miles_to_kilometers<span class="sc">/</span>gallons_to_liters) <span class="sc">~</span> <span class="fu">I</span>(wt<span class="sc">*</span>lb_to_kg), mtcars)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_not_english)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = I(mpg * miles_to_kilometers/gallons_to_liters) ~ 
+    I(wt * lb_to_kg), data = mtcars)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.92994 -1.00453 -0.05318  0.59878  2.91954 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       15.8388     0.7976  19.858  &lt; 2e-16 ***
+I(wt * lb_to_kg)  -5.0452     0.5278  -9.559 1.29e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.294 on 30 degrees of freedom
+Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
+F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>The interpretation is:</p>
+<ul>
+<li>There is a reduction of 5 kilometers per liter for each 1000kg increase in the car weight.</li>
+</ul>
+<p>Much better now, right?</p>
+<p>;)</p>
+</section>
+<section id="closing-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="closing-remarks">Closing remarks</h2>
+<p>I hope you have liked this post, and that it has shed light on you about how to interpret the regression models outputs from R.</p>
+<p>I really missed this content when I was applying linear regression in R, so I really hope it helps you as much as it would have helped me when I was looking for it!</p>
+</section>
+<section id="read-more" class="level2">
+<h2 class="anchored" data-anchor-id="read-more">Read more</h2>
+<ul>
+<li><p>Chapter 3.2 of the book <a href="https://www.statlearning.com/">An Introduction to Statistical Learning (Second Edition)</a> - you can pick the R or Python version to download <strong>for free</strong>.</p></li>
+<li><p><strong>Regression Models Coursera Course</strong> from Johns Hopkins <a href="https://github.com/bcaffo/regmodsbook"><strong>free GitHub content</strong></a>.</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

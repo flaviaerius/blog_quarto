@@ -1,0 +1,45 @@
+---
+title: "About"
+image: foto_2023.jpeg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/flaviaerius
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/fl%C3%A1via-eichemberger-rius-b5119770/
+    - icon: github
+      text: Github
+      href: https://github.com/flaviaerius
+    - icon: email
+      text: email
+      href: mailto:flaviaerius@gmail.com
+
+---
+
+Hi!
+
+I am Flávia!
+
+I am a data scientist with a background on biomedical sciences. 
+I have switched from wet lab to dry lab during my PhD, in which I studied cancer epigenomics, using a lot of bioinformatics both in R and bash.
+
+Now I work as a data scientist in Mendelics, the biggest genomics laboratory of Latin America.
+Mostly I work with research and analysis of DNA sequencing data. 
+
+I also mentor people in R programming, statistics and bioinformatics. 
+
+I have 118 5-star reviews in [codementor](https://www.codementor.io/@flaviaerius). 
+I really love to have this contact with people all over the world, and help them with their struggle coding or understanding a concept, especially because I've been there before and I know how hard that is.
+
+I love learning new things! 
+
+I wanted to learn everything about everything! But I know I can't, so I focus on some few topics at a time, being now mostly data science and genomics-related, apart from other variable topic.
+
+I believe _mens sana in corpore sano_ is totally true, so I like doing some exercise, and I have ran a couple of half marathons before - not suited for any ball-involving sport though. 
+
+Welcome! I hope you enjoy and that you can take something useful or entertaining from here :)
+
+Feel free to send me an email or connect on LinkedIn with the links below.

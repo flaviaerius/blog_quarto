@@ -1,0 +1,327 @@
+---
+title: "Understand Linear Regression Results in R"
+author: "Flávia E. Rius"
+categories: [data science, R, statistics, machine learning, supervised learning, regression]
+---
+
+```{r, include = F, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+In this post I will write about the statistics and metrics of linear regression for you to finally understand all of the output from `summary()` R function applied to an `lm()` object, in a very practical way.
+
+__Disclaimer__: I am __NOT__ a statistician, so to all statisticians out there, I apologize for any misused term. My intention here is just to let people interpret their own regression models and __understand__ what is going on with their data in a practical way.
+ 
+## About linear regression
+
+There are two main uses of linear regression: statistical inference and prediction.
+
+In the statistical inference line, a __linear regression__ is performed to find a relationship of a dependent continuous variable and one or more variables of any type (continuous or categorical). You can, then, __explain__ a relationship between variables.
+
+As a predictive point of view, regression is a part of __supervised learning__, a type of __machine learning__, and can be used to predict new data based on the relationship found between two variables.
+
+These two approaches are not mutually exclusive, they can be used together. You can both explain the relationship between variables and use your model to predict with new data input.
+
+For more insights on this difference, I recommend [this brief Nature discussion and example on RNA-seq data](https://www.nature.com/articles/nmeth.4642.pdf?ssp=1&darkschemeovr=1&setlang=pt-BR&safesearch=moderate), especially the first four paragraphs. 
+
+Concerning the prior assumptions to perform a linear model, such as __linearity__ and __normality__ of the variables, mainly, this is a very discussed topic among statisticians and data scientists. In the __machine learning__ side, the assumptions do not matter that much if the model has a good application in predicting the variable of interest. And for the inference side, the assumptions are more important for the model inference to be correct, but they are not written in stone. For example, [not normally distributed variables might work well in a t-test or linear regression for a large sample size](https://www.annualreviews.org/doi/pdf/10.1146/annurev.publhealth.23.100901.140546). At the same time, to perform linear regressions on gene expression data from RNA-seq, there are several transformations made in the data so it can be normal, linear, and homoskedastic. 
+
+As I said, it is a very much discussed topic and I suggest that you read more about your area of application to decide if you should check for assumptions or not. I won't dive into assumptions in this post.
+
+## Running the linear regression
+
+First of all, we need an analysis. 
+
+We'll use the most classic dataset of R: `mtcars`. It contains measures as weight, miles per gallon, number of cylinders, etc, of 32 models of cars from 1974. You can explore the dataset more by typing `?mtcars` in your R console.
+
+Let's check the variables distribution overall:
+
+```{r}
+summary(mtcars)
+```
+
+&nbsp;
+
+They are all numeric, but `am` and `vs` seem to be binary, and some seem to be categorical, as `carb` and `cyl`.
+
+In our analysis to demonstrate the linear regression metrics and statistics, our __question__ will be: 
+
+> Does the weight of a car influences in how many miles it can go per gallon of gas?
+
+To answer that, we will use the predictor (independent variable) __weight__ or `wt` and the predicted (dependent variable) __miles per gallon__ or `mpg`.
+
+Let's fit the model:
+
+
+
+```{r}
+fit <- lm(mpg ~ wt, mtcars)
+```
+
+&nbsp;
+ 
+To obtain all statistics and some of the metrics for our model, we need to use the function `summary()` in R.
+
+&nbsp;
+
+```{r}
+summary(fit) 
+```
+
+&nbsp;
+
+Okay, so we have this ocean of information and how can we answer our question? p value is low, and all three stars for coefficients, this seems nice.
+
+Let's see one by one, by order of appearance in the output of `summary(fit)`.
+
+## Metrics and statistics
+
+While __metrics__ are the values to measure performance of the overall model, __statistics__ are the coefficients of hypothesis tests and estimates of each variable. Below they will be explained.
+
+To visualize some parts of the explanation, the linear regression plot will be illustrated below.
+
+```{r, echo = F}
+mtcars %>% 
+  ggplot(aes(wt, mpg)) +
+  geom_point() +
+  geom_smooth(method='lm', formula = y ~ x) +
+  ggtitle("Linear Regression Plot")
+```
+
+### __1. Residuals__
+
+&nbsp;
+
+```{r}
+# Residuals:
+#     Min      1Q  Median      3Q     Max 
+# -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+```
+
+&nbsp;
+
+"Residual" was a term invented because an executive of a drug industry didn't want to admit having "error" in their data when sending it to FDA (you can find this info on page 239 of the book [The Lady Tasting Tea](https://www.goodreads.com/book/show/106350.The_Lady_Tasting_Tea?from_search=true&from_srp=true&qid=x3RuL9nMWd&rank=1)). So yes, these are __the "errors" of your model__. Not that there is something wrong, but the fitted line is not perfect, there are deviations from it to your real data because other factors and randomness affect your predicted variable (`mpg`) too. Those deviations are the residuals. 
+
+They are calculated subtracting the predicted data from the observed data. In our case, predicted (obtained using the model) miles per gallon minus observed (from `mtcars`) miles per gallon.
+
+To see all of them, instead of a summary, run:
+
+&nbsp;
+
+```{r}
+resid(fit)
+```
+
+&nbsp;
+
+It is possible to __explore the residuals__ checking them for some assumptions of a linear regression, and hidden patterns in the data. This is a very long topic, so it will be left to another post.
+
+### __2. Coefficients__
+
+Overall, the coefficients contain information about the predictors of your dependent variable. Below you can see a detailed explanation.
+
+
+&nbsp;
+
+```{r}
+# Coefficients:
+#             Estimate Std. Error t value Pr(>|t|)    
+# (Intercept)  37.2851     1.8776  19.858  < 2e-16 ***
+# wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+```
+
+&nbsp;
+
+  __a. Intercept__
+  
+  Intercept is the mean value of y when x is 0 in our model. In our example, how many miles a gallon would make in average for a car with __zero lbs__. Also represented as β0 in the linear regression equation: 
+  
+  __y = β0 + β1x + ε__
+  
+  In our example it makes no sense at all. There is no car with 0 lbs. Therefore we can just ignore it and interpret the coefficient of interest, β1.
+  
+  __b. wt__
+  
+  Represented by the variable name, this is the angular coefficient, β1. It represents the slope of the line in the linear regression plot. This is how much __y__ increases or decreases with the increase of __one unit of x__. In our example, it is how many __miles per gallon__ _decreases_ (estimate is negative = -5.3) with the _increase_ of each __1000 lb weight__ (unit of measure of wt) of the car.
+  
+  The columns for the coefficients are:
+  
+  __I. Estimate__
+    
+  Estimates are the values per se of β0 (`Intercept`) and β1 (`wt`). The explanation of them is above.
+  
+  __II. Std Error__
+    
+  Standard Error is the deviation of the estimate from its real value. The smallest this value is, more precise the estimate is. It tends to be smaller if you have a big number of observations, since it is the standard deviation divided by n. 
+  
+  __III. t value__ 
+    
+  This is the value of t in the Student's t test for one sample. The alternative hypothesis tested is: is your estimate different than zero?, which relies on the distribution of your data being a t distribution, which is very close to a normal distribution. It is calculated by Estimate/Std Error.
+  
+  __IV. Pr(>|t|)__
+    
+  This is the __p value__ for the t test applied to your estimate. If it is less than the considered alpha - the error you choose to accept (generally 0.05) - then you can say your estimates are very likely to be significant. 
+  
+### __3. Signif. codes__
+
+This is just a legend for what the asterisks and dot mean concerning level of significance for the p values.
+
+### __4. Degrees of freedom__
+
+```{r}
+# 30 degrees of freedom
+```
+
+&nbsp;
+
+__Degrees of freedom__ (__DF__) are how many units of your data are "free to vary".
+
+Practically, this is how many observations you have minus the number of estimated parameters used in your model (in this case, intercept and weight). Which means that it is directly proportional to the number of samples, and inversely proportional to the number of parameters and variables in your analysis. Degrees of freedom are crucial to determine your t distribution shape and what will be the significance (p value) of the estimates. 
+
+### __5. Residual standard error__
+
+&nbsp;
+
+```{r}
+# Residual standard error: 3.046
+```
+
+&nbsp;
+
+__Residual standard error__ (__RSE__) is the average deviation of predicted values (from the model) from observed values (the ones in your dataset). 
+
+It can be calculated with:
+
+```{r}
+y <- mtcars$mpg
+y_hat <- predict(fit)
+df <- 30 # degrees of freedom
+
+sqrt(sum((y - y_hat)^2)/df)
+```
+
+&nbsp;
+
+Statistically speaking, it is the estimate of standard deviation of predicted values from real values; a measure of variation around the regression line. 
+
+Confidence intervals around predicted values are generated using the __RSE__, therefore it is an important metric of your model. Large __RSE__ can generate inaccurate predictions.
+
+### __6. Multiple R-squared__
+
+&nbsp;
+
+```{r}
+# Multiple R-squared:  0.7528
+```
+
+&nbsp;
+
+This is the famous R squared (R²). The proportion of variance of your dependent variable, y, which is explained by your model. Simplifying: proportion of variance explained. 
+
+Since it is a proportion, its value is between 0 and 1. 
+
+Our model explains 75% of variance in miles per gallon.
+
+This does not mean that if you have an R² = 0.3 for example you have a poor regression analysis. Some variables are just partly explained by the predictor analyzed, and if your intention is to interpret the influence of a predictor in a response variable, it may be useful even with a low variance explained. This happens in genomics, with polygenic scores for example, when your analyzed genetics explains only a part of a trait or disease, while the rest is explained by other factors such as environment.
+
+Also, this is not the best way to analyze if your model is good or not. `RMSE` (Root Mean Squared Error), which is just squaring residuals, averaging them, and getting the square root, is generally a better way to evaluate whether you have a less prone to errors model. The smallest the RMSE, the better your model is. 
+
+&nbsp;
+
+```{r RMSE}
+RMSE <- sqrt(mean(resid(fit)^2))
+
+RMSE
+```
+
+&nbsp;
+
+That means that in average there is an error of 2.9 miles per gallon in our model.
+
+Have in mind what my boss always repeats: "All models are wrong, but some are useful", a classical phrase by George Box.
+
+### __7. Adjusted R-Squared__
+
+&nbsp;
+
+```{r}
+# Adjusted R-squared:  0.7446
+```
+
+&nbsp;
+
+When there is more than one predictor in your linear regression (multiple linear regression), there is always an increase in R² independent of increase in variance explained, due to just the addittion of a new predictor. Therefore the R² value is adjusted for that.  
+
+To compare multiple linear regression models, or models with different number of predictors, it is recommended to check adjusted R-squared instead of multiple R-squared for variance explained.
+
+### __8. F-statistic__
+
+&nbsp;
+
+```{r}
+# F-statistic: 91.38 on 1 and 30 DF
+```
+
+&nbsp;
+
+F is the statistic from the F-test performed in your model. Basically the F value is used to see if there is any relationship between the response and predictors in a __multiple linear regression__. In the example discussed here, a simple linear regression, the estimate β1 = 0 is a better way to tell that there is no relationship between the response and predictor.
+
+### __9. p-value__
+
+&nbsp;
+
+```{r}
+# p-value: 1.294e-10
+```
+
+&nbsp;
+
+This is the F-test p-value, which tells you if your F-test is significant. A p-value below the alpha you choose (for example, 0.05) means there is a high chance that at least one of your predictors is significantly associated with your dependent variable. It is more used for multiple regression models, which can be approached in another blog post.
+
+
+## Interpretation concerns
+
+Some transformations can be used in the linear regression to make your model more interpretable.
+
+For example, let's say that, as me, you are not from a country that uses _lbs_ as a weight metric, neither _miles_ for a distance one, or _gallons_ for a volume one. 
+
+Instead, you would like to interpret your model using _kilograms_, _kilometers_, and _liters_. Is this possible?
+
+__Yes!__
+
+Using the `I()` operator around the terms of the linear regression, just so you can transform from inside of the `lm()` function, we can transform the terms and get the proper interpretation. See below:
+
+&nbsp;
+
+```{r}
+miles_to_kilometers <- 1.61
+gallons_to_liters <- 3.79
+lb_to_kg <- 0.45
+
+fit_not_english <- lm(I(mpg*miles_to_kilometers/gallons_to_liters) ~ I(wt*lb_to_kg), mtcars)
+
+summary(fit_not_english)
+```
+
+&nbsp;
+
+The interpretation is:
+
+- There is a reduction of 5 kilometers per liter for each 1000kg increase in the car weight.
+
+Much better now, right?
+
+;) 
+
+## Closing remarks
+
+I hope you have liked this post, and that it has shed light on you about how to interpret the regression models outputs from R. 
+
+I really missed this content when I was applying linear regression in R, so I really hope it helps you as much as it would have helped me when I was looking for it!
+
+## Read more
+
+- Chapter 3.2 of the book [An Introduction to Statistical Learning (Second Edition)](https://www.statlearning.com/) - you can pick the R or Python version to download __for free__. 
+
+- __Regression Models Coursera Course__ from Johns Hopkins [__free GitHub content__](https://github.com/bcaffo/regmodsbook).

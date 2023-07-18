@@ -1,0 +1,86 @@
+---
+title: "Stuck in an error message? Let me help you fix it!"
+author: "Flávia E. Rius"
+date: '2022-06-14'
+categories: [data science, R, error]
+---
+
+This is for R beginners, or even intermediate and advanced users who want a different perspective about how to debug errors in R.
+
+
+~~Always~~ Sometimes you face errors in R, it is unavoidable. I will give you three different tools to debug the errors on your own, and avoid getting stuck not knowing what to do.
+
+### 1. Look for typos in your code. 
+As simple as that. Very often they are the origin of the error message. 
+       A parentheses missing, or in the wrong place, same as a comma, can change R interpretation and lead to different errors. 
+       Same if you add the wrong variable name.
+       
+```{r, error = T}
+# For example, forgetting a {
+
+for(y in 1:10) {
+ if(y > 2) {
+   print(paste(y, "is bigger than 2."))
+ }
+  else {
+    print(paste(y, "is not bigger than 2."))
+  #### It should be here ####
+}
+
+```
+
+
+### 2. Use the great question mark tool in R to access what the function does. 
+  By typing ?[function], you will be able to see a help page, very often well described. 
+  Such as:
+  
+```{r}
+?mean
+```
+<br/><br/> 
+```{r, echo = F}
+helpfile <- utils:::.getHelpFile(help(mean))
+outfile <- tempfile(fileext = ".html")
+tools:::Rd2HTML(helpfile, out =outfile)
+rawHTML <- paste(readLines(outfile), collapse="\n")
+knitr::asis_output(htmltools::htmlPreserve(rawHTML))
+```
+
+<br/><br/>  
+
+   When you get errors of type: you are inserting a data frame when it should be a numeric vector, for example, you will be able to find this out by reading each parameter of a function in this help document. And pay attention to the specification of __class__ of the vector you should add to each argument of your function. In our example here, x should be an _R object_ of classes _numeric_, _logical_, _date_, _date-time_ or _time interval_.
+       
+Also, looking at the __examples__ could be the best way to figure out how a function works. Testing this example and exploring the output is a great way to figure out which class or shape you need for the function too, because sometimes this is not so well documented. You may need unique values or a numeric instead of factor (this happens often for statistical functions). 
+       
+Use the trial and error technique. 
+       
+__Apply__ what you have read and what you think you have understood by the help page in your code to see if that is really it. Even to a smaller piece of your dataset, so it don't take too long to run. This is very important for understanding better the functions and reach what you want. See the output of the example and compare it to the one using your data.
+
+### 3. Google the error message. 
+
+If none of the alternatives above works, just go and [Google](https://www.google.com/) it.
+
+You will find answers in [stackoverflow](https://stackoverflow.com/), [GitHub issues](https://github.com/tidyverse/ggplot2/issues), and blog posts, [R forums](https://community.rstudio.com/), among other vehicles of information. Read all of the answers, not just the first one, and the comments too. This increases the chance for you to find that piece of information you need.
+
+Sometimes you need to install an additional package or extension to your OS in order to fix the error. And that is fine. 
+       
+Almost always someone has already encounter the same error as you, and the coding community is so awesome that they help anyone with a doubt, and this stays fixed in the forums.
+
+  If you don’t find your question or any similar in the forum, ask it yourself. In stackoverflow, don’t forget to read the code of conduct and __post a reproducible example__ so the community can help you better. This allows other people to reproduce your error locally and figure out how to fix it.
+
+### Bonus! 
+ If you’re feeling lazy, skip the first two steps and __Google the error message right away__. 
+
+You may find the answer easily, or find a long blog post with details hard to understand when you are a beginner. 
+ 
+When the documentation for help in R is lacking information, this is better, but to know that you would need to meet the previous step which is looking for the R help message.
+
+You are free to decide which path to follow.
+
+I hope these tips help you in your R journey. 
+
+Feel free to contact me if you find that useful, I will love to hear from you! 
+
+Best of luck!
+
+Flávia

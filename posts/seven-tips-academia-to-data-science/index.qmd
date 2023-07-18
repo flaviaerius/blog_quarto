@@ -1,0 +1,56 @@
+---
+title: "7 tips for academic researchers on their way to Data Science"
+author: "Flávia E. Rius"
+date: "2022-08-10"
+categories: [data science, R, PhD, academia]
+---
+
+Very often people ask me about my transition from __academic research__ to a position as a __data scientist__. I have compiled in this article some advice to researchers in academia (masters degree, PhD, postdoctoral research) who want to be data scientists in the technology industry^[Article originally published in Portuguese at [Linkedin](https://www.linkedin.com/pulse/7-dicas-para-pesquisadores-acad%C3%AAmicos-rumo-%C3%A0-ci%C3%AAncia-fl%C3%A1via/)].
+
+My focus of learning was in the genomics area, but the tips are useful for other areas too. When I got into my PhD program, I didn't know the career of data scientist, so I focused in learning __bioinformatics__. The division between those two sciences in the genomics area is very tenuous. The bioinformatician has a bigger focus on the computational part, developing sequencing data analysis pipelines, software, and orchestrating the interface with data in the cloud. On the other hand, the data scientist is more focused in analyzing research and development (R&D) data, building models, and in delivering information in the format of tables and graphs, which are necessary for development of a new product, or evaluation of a project. Both do a little bit of each other's function, but basically, the distinction between them is the one I have explained.
+
+Below I will give you seven tips I have joined together based on my learning process and career transition from bench scientist (wet lab) to 100% computational researcher (dry lab), and, afterwards, to a position as a data scientist at Mendelics, the biggest company focused in genomic analysis of Latin America.
+
+## **1\. Don't give up on learning programming**
+
+I've had SO much difficulty to learn R, my first scripts were awful, and I barely understood what I was doing. I started by only replicating tutorials, and, as the time passed, I tried to understand what the functions were doing, and the different rules of R. A small notebook was where I kept my notes about every new function I discovered. One colleague said to me, in an introduction to R course: "The learning curve is very slow in the beginning, but afterwards you get into the plateau phase, and it turns up very easy!". She was right. Not that I know everything, but today is much easier to learn something new, now that I already know how R works basically.
+
+## **2\. Know a bit about computing** 
+
+To differentiate RAM memory from disk memory, and what is a processor are parts of the first steps for you to have an idea about computing. You will also need to have a notion of your machine's capacity, and of the disk space that a file occupies, to architect about a way to manipulate it. Besides that, to know that the server is nothing more than another computer connected with yours by a "bridge" via ssh command, just as the access to cloud computing or storage. Nothing exists online-only. Several computers and disk units (HD or SSD) are present in fixed places and connected to your computer by "bridges".
+
+I have used the online course [Introduction to Computer Science](https://en.wikiversity.org/wiki/Introduction_to_Computer_Science), from Wikiversity, to learn the basic concepts of computation in the beginning. To understand what is behind that black screen and of the commands will clear your mind tangled about so many unknown novelties.
+
+## **3\. Study statistics** 
+
+Here, my advice is to study as the statistical tests appear in your project. Wanting to know absolutely everything about statistics won't help, as it is such a vast area. 
+
+Instead of that, try to understand the reason of each and every statistical test of your work. What question is the test trying to answer exactly? It seems like I am telling a trivial thing, that everybody knows, after all, the project belongs to the researcher working on it, but very often you are just copying what others have done, and do not understand what is happening there. This has happened with me sometimes. For example, the survival analysis I have used to understand the influence of some covariables in survival of melanoma patients was applied with a very shallow knowledge of mine in the beginning. But I went after understanding better about Hazard Ratio interpretation, and robustness of Cox regression (multivariate) compared to Kaplan-Meier (univariate), and, with that, acquired more knowledge about this statistical analysis. And, of course, I am still learning each day more about this fascinating area that is statistics.
+
+## **4\. Don't try to complicate the simple** 
+
+It is like when you are learning a new language. If you are learning Spanish, you don't need to use difficult words to speak, go with the simple, the vocabulary that you already know. With scripts it works the same way. 
+
+Write the code as simple as possible, and aim at learning more complex functions and tools, such as `for` loops, `lapply` in case of R language, or `if` clauses. Of course you will use a lot of ctrl+c and ctrl+v on stackoverflow code that you have no idea on how it works, but that solves your problem. With time, you will start to search, read the documentation of that function, test it in other datasets, take out a variable, add another one, and learn what the function does. I recommend to include a to-do list with the abilities you want to acquire in R. I did that with the for loop. See the new function as a new word in a vocabulary, and the for loop structure as a new syntax. While you still don't know how to shorten your lines of code, there is no problem in copying and pasting several times. If it works, go ahead!
+
+## **5\. Always explore the data you are analyzing** 
+
+This is a basic one, but I also didn't use in the beginning. I used to analyze stuff by repeating tutorials and never taking a look at the start and intermediate data. If you use `head` command, see the columns your dataset has, number of lines, and if variables are numeric or not, minimum, maximum, and mean values, you have a better idea on what is happening in that tutorial you are replicating. Do it not only with the initial dataset, but also with the intermediate ones, and with the final. This way you will learn what is happening in each step of your data processing. Likewise observe new variables created, and the output of some functions in the console.
+
+## **6\. Learn to google the error message**
+
+And also to search what you need to do with your code. As the time passes you learn the best way to search, and how to write the query to find what you want. I believe this is related to acquiring more vocabulary in the programming language you are dealing with. The error messages are unavoidable, and, unless they give you a clue that allow the solution to the problem (eg. class is numeric and you need a factor, in R), you will need to google them. Then you probably will run into an answer from [stackoverflow](https://stackoverflow.com/), from a [github issue](https://github.com/tidyverse/ggplot2/issues/2252), or even from a blog post about that type of error message, and how to fix it. Before publishing a question in stackoverflow, TURN THE INTERNET UPSIDE DOWN to know if someone hasn't asked that before. Chances are 99% that the answer is already somewhere, especially when you are a beginner. If there is no such question, then it is OK for you to publish it.
+
+## **7\. Organize your data** 
+
+It is important to have a structure that you understand, because a research needs reproducibility, and you inevitably will need to go back and run that script again, to make a small adjustment in the plots before submitting your manuscript to the journal, for example. So it is necessary that a logical structure of folders (directories) exists, and a documentation about where to find each important data of your research. This skill will be highly transfered to your data science job.
+
+Although it will be a lot of work, it is very important to have documentation. The organization may not be trivial in the beginning, but it is worth making an effort to structure your scripts and data in a certain moment. Your self from the future will be definitely very grateful.
+
+These are the tips I wanted to pass along. Undoubtedly I would have benefited if I have read them while I was learning, so I believe they may have a value to you, if you are learning as well. Certainly the abilities I have acquired following those tips are fundamental to what I do nowadays as a data scientist at Mendelics, and also as a mentor. Then, if you want to follow this path, and, as me, doesn't have a background in computation or statistics, enjoy, learn with my mistakes, and go on to this world of data science. 
+
+If you have any questions, want to know more about any of these topics, or even if you have a suggestion, feel free to contact me; I will be glad to hear from you.
+
+All the best,
+
+Flávia E. Rius
