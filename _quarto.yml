@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  google-analytics: "UA-367916546"
   title: "Flávia E. Rius"
   navbar:
     right:
