@@ -14,10 +14,10 @@ website:
 format:
   html:
     theme: darkly
-    css: styles.css
     
 comments:
   giscus: 
+    theme: cobalt
     repo: flaviaerius/blog_quarto
 
 
