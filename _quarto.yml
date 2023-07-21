@@ -13,7 +13,7 @@ website:
         href: https://twitter.com/flaviaerius
 format:
   html:
-    theme: solar
+    theme: darkly
     css: styles.css
     
 comments:
