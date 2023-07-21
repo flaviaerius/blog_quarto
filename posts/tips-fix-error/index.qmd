@@ -37,7 +37,7 @@ for(y in 1:10) {
 ```{r}
 ?mean
 ```
-<br/><br/> 
+
 ```{r, echo = F}
 helpfile <- utils:::.getHelpFile(help(mean))
 outfile <- tempfile(fileext = ".html")
@@ -46,7 +46,7 @@ rawHTML <- paste(readLines(outfile), collapse="\n")
 knitr::asis_output(htmltools::htmlPreserve(rawHTML))
 ```
 
-<br/><br/>  
+
 
    When you get errors of type: you are inserting a data frame when it should be a numeric vector, for example, you will be able to find this out by reading each parameter of a function in this help document. And pay attention to the specification of __class__ of the vector you should add to each argument of your function. In our example here, x should be an _R object_ of classes _numeric_, _logical_, _date_, _date-time_ or _time interval_.
        
