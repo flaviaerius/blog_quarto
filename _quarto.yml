@@ -5,8 +5,11 @@ website:
   google-analytics: "G-S78JRQSZER"
   title: "Flávia E. Rius"
   navbar:
-    right:
+    left:
+      - text: "Home"
+        file: index.qmd
       - about.qmd
+    right:
       - icon: github
         href: https://github.com/flaviaerius
       - icon: twitter
