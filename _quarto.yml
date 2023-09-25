@@ -1,9 +1,9 @@
 project:
   type: website
-
+  
 website:
-  google-analytics: "G-S78JRQSZER"
   title: "Flávia E. Rius"
+  google-analytics: "G-S78JRQSZER"
   navbar:
     left:
       - text: "Home"
@@ -20,7 +20,7 @@ format:
     
 comments:
   giscus: 
-    theme: cobalt
+    theme: dark_dimmed
     repo: flaviaerius/blog_quarto
 
 
