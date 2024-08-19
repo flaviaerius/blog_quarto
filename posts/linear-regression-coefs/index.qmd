@@ -3,6 +3,8 @@ title: "Understand Linear Regression Results in R"
 author: "Flávia E. Rius"
 date: "2023-07-20"
 categories: [data science, R, statistics, machine learning, supervised learning, regression]
+website:
+  google-analytics: "G-S78JRQSZER"
 ---
 
 ```{r, include = F, message=FALSE, warning=FALSE}
