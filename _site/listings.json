@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/big-data-bioinformatics/index.html",
       "/posts/linear-regression-coefs/index.html",
       "/posts/seven-tips-academia-to-data-science/index.html",
       "/posts/tips-fix-error/index.html"

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Flávia E. Rius">
+<meta name="dcterms.date" content="2025-02-11">
 
-<title>Flávia E. Rius</title>
+<title>How to operate large files in bioinformatics – Flávia E. Rius</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9ee4715876b728871c31173e7b7d678f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9ee4715876b728871c31173e7b7d678f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,35 +68,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-S78JRQSZER"></script>
 
 <script type="text/javascript">
@@ -108,41 +79,18 @@ gtag('config', 'G-S78JRQSZER', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Flávia E. Rius" href="index.xml" data-external="1"><meta property="og:title" content="Flávia E. Rius">
+<meta property="og:title" content="How to operate large files in bioinformatics – Flávia E. Rius">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://flaviaerius.com/posts/big-data-bioinformatics/DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp">
 <meta property="og:site_name" content="Flávia E. Rius">
-<meta name="twitter:title" content="Flávia E. Rius">
+<meta property="og:image:alt" content="A beginner bioinformatician worried about operating large files">
+<meta name="twitter:title" content="How to operate large files in bioinformatics – Flávia E. Rius">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://flaviaerius.com/posts/big-data-bioinformatics/DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp">
 <meta name="twitter:creator" content="@flaviaerius">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image:alt" content="A beginner bioinformatician worried about operating large files">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -152,7 +100,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Flávia E. Rius</span>
     </a>
   </div>
@@ -163,11 +111,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -192,209 +140,100 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Flávia E. Rius</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">How to operate large files in bioinformatics</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">bioinformatics</div>
+                <div class="quarto-category">cloud computing</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Flávia E. Rius </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 11, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="UGhE">PhD <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(3)</span></div><div class="category" data-category="YWNhZGVtaWE=">academia <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YmlvaW5mb3JtYXRpY3M=">bioinformatics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xvdWQlMjBjb21wdXRpbmc=">cloud computing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YSUyMHNjaWVuY2U=">data science <span class="quarto-category-count">(3)</span></div><div class="category" data-category="ZXJyb3I=">error <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3VwZXJ2aXNlZCUyMGxlYXJuaW5n">supervised learning <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cloud-computing" id="toc-cloud-computing" class="nav-link active" data-scroll-target="#cloud-computing">Cloud computing</a>
+  <ul class="collapse">
+  <li><a href="#google-cloud-compute-engine" id="toc-google-cloud-compute-engine" class="nav-link" data-scroll-target="#google-cloud-compute-engine">Google Cloud Compute Engine</a></li>
+  </ul></li>
+  <li><a href="#servercluster-in-your-university" id="toc-servercluster-in-your-university" class="nav-link" data-scroll-target="#servercluster-in-your-university">Server/cluster in your university</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<p>Situation: you start very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and then you try to transfer all of the data to your computer, and then you see that, bleh, you don’t have enough storage on your computer. Then what?</p>
+<p>You start panicking? No!</p>
+<p>You start searching the web for any information on that, and come up with a gazillion new terms that you have never heard before. <em>Server</em>, <em>cluster</em>, <em>cloud computing</em>, <em>ssh</em>, <em>ssd</em>, <em>bucket</em>, to enumerate a few. And now you panic for real.</p>
+<p><img src="DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp" class="img-fluid" style="width:50.0%" alt="A beginner bioinformatician worried about operating large files">.</p>
+<p>Don’t worry, I am here to help! I’ll get straight to the point about the options available to tackle this problem when working with big data in bioinformatics.</p>
+<p>Basically you have two main options:</p>
+<ul>
+<li><p>Cloud computing</p></li>
+<li><p>Server/cluster of your institution (when available)</p></li>
+</ul>
+<section id="cloud-computing" class="level2">
+<h2 class="anchored" data-anchor-id="cloud-computing">Cloud computing</h2>
+<p>These are the services provided by companies in which you can pay for a temporary remote machine to run your analyses. Google Cloud, Amazon AWS and Azure are the most well-known providers of this type of service. Basically you need to create an account, link to a payment method, and start using it.</p>
+<p>If this is your option, you need to learn the basics of analyzing data in the cloud. I would go with the simplest way, which is creating an instance. An instance is nothing more than a computer you configure remotely. You need to pick a size of CPU, RAM memory and storage, which can be HDD (popularly known as HD, cheaper and slower) or SSD (faster to transfer data, but more expensive). Then, you just transfer your data to the instance using wget or ssh, depending on where this data will come from, and you can work from there (using the command line, of course).</p>
+<section id="google-cloud-compute-engine" class="level3">
+<h3 class="anchored" data-anchor-id="google-cloud-compute-engine">Google Cloud Compute Engine</h3>
+<p>Below I will give you some details on how to do this on Google Cloud Compute Engine. They give $300 of free credits to new Google Cloud users, so you can test and potentially do the analysis you need for free. To give you an idea of costs, a general use machine with 4 CPUs, 15GB of memory (RAM) and 100GB of HDD storage, running for 30 days <a href="https://shorturl.at/I9eY2">would cost you 140 USD</a>. You can calculate the expected amount for your personalized needs in the calculator page.</p>
+<p>After setting up your instance and transferring the data, you need to install all software needed to run your analyses from scratch. For example, let’s say that you want to run an RNA-seq alignment using STAR. You will need to install STAR, transfer the reference genome or transcriptome to the instance, build the reference for this program, and then run it. Don’t forget that any other tools you might need for previous steps such as QC must be installed to the instance too. After all, <strong>it is a new computer you are renting for a limited time</strong>.</p>
+<p>After finishing your analysis, you need to deal with the resulting data. Let’s talk about this in another post, because it is a topic that deserves better attention.</p>
+</section>
+</section>
+<section id="servercluster-in-your-university" class="level2">
+<h2 class="anchored" data-anchor-id="servercluster-in-your-university">Server/cluster in your university</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="server-unsplash.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Photo by <a href="https://unsplash.com/@tvick?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Taylor Vick</a> on <a href="https://unsplash.com/photos/cable-network-M5tzZtFCOfs?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></figcaption>
+</figure>
+</div>
+<p>In this option there are two different ways that a server might be provided to you: via a job schedule strategy or by giving you access to a slice of this server.</p>
+<p>A server, as the instance in the cloud computing resource, is a remote computer to which you have access. The job schedule strategy requires you to learn how to structure your data and then you need to write your scripts and submit them to the job scheduler, then wait for your turn to run them, as other people send their jobs to the scheduler too. The most popular examples are Slurm and SGE.</p>
+<p>Generally there is a free limited space (scratch) of the server for you to experiment with a slice of the data (so you are certain that your script is correct to send to schedule for example). Some more complex labs allow you to send to a specific server schedule line, depending on your demand of cpu and processing. These are aspects you may require by task as well when submitting your job to the scheduler.</p>
+<p>Another way of doing this, generally in less experienced labs, is by requesting a specific slice of the server available in the university for you to use during your full project. In my PhD I knew that I could have asked for it in my university, but I did not have a bit of idea on what would be my CPU, RAM memory and storage needs. Therefore I could not get it. I still relied on my collaborator server to finish my analyses. So this is an important knowledge to have.</p>
+<p>As important as it might sound, calculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post. It depends on too many factors.</p>
+<p>I hope this post has helped you on your bioinformatics journey!</p>
+<p>Did I miss any important points? Let me know in the comments below if you have something to add to this post!</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="YmlvaW5mb3JtYXRpY3MlMkNjbG91ZCUyMGNvbXB1dGluZw==" data-listing-date-sort="1739242800000" data-listing-file-modified-sort="1742947059888" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="882">
-<div class="thumbnail">
-<p><a href="./posts/big-data-bioinformatics/index.html" class="no-external"></a></p><a href="./posts/big-data-bioinformatics/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/big-data-bioinformatics/DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp" alt="A beginner bioinformatician worried about operating large files"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/big-data-bioinformatics/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/big-data-bioinformatics/index.html" class="no-external">How to operate large files in bioinformatics</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/big-data-bioinformatics/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('YmlvaW5mb3JtYXRpY3M='); return false;">
-bioinformatics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xvdWQlMjBjb21wdXRpbmc='); return false;">
-cloud computing
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/big-data-bioinformatics/index.html" class="no-external">Situation: you start very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/big-data-bioinformatics/index.html" class="no-external">
-<div class="listing-date">
-Feb 11, 2025
-</div>
-<div class="listing-author">
-Flávia E. Rius
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDc3RhdGlzdGljcyUyQ21hY2hpbmUlMjBsZWFybmluZyUyQ3N1cGVydmlzZWQlMjBsZWFybmluZyUyQ3JlZ3Jlc3Npb24=" data-listing-date-sort="1689822000000" data-listing-file-modified-sort="1713392673463" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2200">
-<div class="thumbnail">
-<p><a href="./posts/linear-regression-coefs/index.html" class="no-external"></a></p><a href="./posts/linear-regression-coefs/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/linear-regression-coefs/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/linear-regression-coefs/index.html" class="no-external">Understand Linear Regression Results in R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/linear-regression-coefs/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">
-data science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">
-statistics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZSUyMGxlYXJuaW5n'); return false;">
-machine learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('c3VwZXJ2aXNlZCUyMGxlYXJuaW5n'); return false;">
-supervised learning
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmVncmVzc2lvbg=='); return false;">
-regression
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/linear-regression-coefs/index.html" class="no-external">In this post I will write about the statistics and metrics of linear regression for you to finally understand all of the output from <code>summary()</code> R function applied to an <code>lm()</code> o…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/linear-regression-coefs/index.html" class="no-external">
-<div class="listing-date">
-Jul 20, 2023
-</div>
-<div class="listing-author">
-Flávia E. Rius
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDUGhEJTJDYWNhZGVtaWE=" data-listing-date-sort="1660100400000" data-listing-file-modified-sort="1689720342855" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1485">
-<div class="thumbnail">
-<p><a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external"></a></p><a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external">7 tips for academic researchers on their way to Data Science</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">
-data science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UGhE'); return false;">
-PhD
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YWNhZGVtaWE='); return false;">
-academia
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external">Very often people ask me about my transition from <strong>academic research</strong> to a position as a <strong>data scientist</strong>. I have compiled in this article some advice to researchers in academia…<sup></sup></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/seven-tips-academia-to-data-science/index.html" class="no-external">
-<div class="listing-date">
-Aug 10, 2022
-</div>
-<div class="listing-author">
-Flávia E. Rius
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDZXJyb3I=" data-listing-date-sort="1655175600000" data-listing-file-modified-sort="1689906993871" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="745">
-<div class="thumbnail">
-<p><a href="./posts/tips-fix-error/index.html" class="no-external"></a></p><a href="./posts/tips-fix-error/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/tips-fix-error/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/tips-fix-error/index.html" class="no-external">Stuck in an error message? Let me help you fix it!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/tips-fix-error/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">
-data science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZXJyb3I='); return false;">
-error
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/tips-fix-error/index.html" class="no-external">This is for R beginners, or even intermediate and advanced users who want a different perspective about how to debug errors in R.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/tips-fix-error/index.html" class="no-external">
-<div class="listing-date">
-Jun 14, 2022
-</div>
-<div class="listing-author">
-Flávia E. Rius
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -812,10 +651,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="flaviaerius/blog_quarto" data-repo-id="R_kgDOJ96K-A" data-category="General" data-category-id="DIC_kwDOJ96K-M4CYB0z" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 </div> <!-- /content -->
 
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
