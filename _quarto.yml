@@ -21,8 +21,12 @@ website:
 format:
   html:
     smooth-scroll: true
+    lazy-load-images: true
     theme: darkly
     toc: true
+    embed-resources: true
+    self-contained: true
+    highlight-style: github
 
 comments:
   giscus:

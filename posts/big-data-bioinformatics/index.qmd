@@ -1,7 +1,7 @@
 ---
 title: 'How to operate large files in bioinformatics'
 author: 'Flávia E. Rius'
-date: '2025-02-11'
+date: '2025-03-25'
 categories: [bioinformatics, cloud computing]
 website:
     google-analytics: 'G-S78JRQSZER'

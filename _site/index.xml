@@ -76,6 +76,10 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b15fa15 (t)
 <p>In this post I will write about the statistics and metrics of linear regression for you to finally understand all of the output from <code>summary()</code> R function applied to an <code>lm()</code> object, in a very practical way.</p>
 <p><strong>Disclaimer</strong>: I am <strong>NOT</strong> a statistician, so to all statisticians out there, I apologize for any misused term. My intention here is just to let people interpret their own regression models and <strong>understand</strong> what is going on with their data in a practical way.</p>
 <section id="about-linear-regression" class="level2">
@@ -176,7 +180,15 @@ F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
 <p>To visualize some parts of the explanation, the linear regression plot will be illustrated below.</p>
 <div class="cell">
 <div class="cell-output-display">
+<<<<<<< HEAD
 <p><img src="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+=======
+<div>
+<figure class="figure">
+<p><img src="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+>>>>>>> b15fa15 (t)
 </div>
 </div>
 <section id="residuals" class="level3">
