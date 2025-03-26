@@ -2,7 +2,13 @@ project:
   type: website
 
 website:
-  title: "Flávia E. Rius"
+  announcement:
+    icon: laptop
+    dismissable: true
+    content: '**New post! How To Operate Large Files in Bioinformatics**'
+    type: light
+    position: below-navbar
+  title: "Flávia E. Rius Blog"
   site-url: "https://flaviaerius.com/"
   open-graph: true
   twitter-card:
@@ -22,7 +28,9 @@ format:
   html:
     smooth-scroll: true
     lazy-load-images: true
-    theme: darkly
+    theme: 
+      light: flatly
+      dark: darkly
     toc: true
     embed-resources: true
     self-contained: true

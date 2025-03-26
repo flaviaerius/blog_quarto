@@ -1,5 +1,5 @@
 ---
-title: "Stuck in an error message? Let me help you fix it!"
+title: "Stuck in an Error Message? Let Me Help You Fix It!"
 author: "Flávia E. Rius"
 date: '2022-06-14'
 categories: [data science, R, error]

@@ -1,5 +1,6 @@
 ---
-title: 'How to operate large files in bioinformatics'
+title: 'How To Operate Large Files in Bioinformatics'
+image: 'first_image.png'
 author: 'Flávia E. Rius'
 date: '2025-03-25'
 categories: [bioinformatics, cloud computing]
@@ -7,13 +8,13 @@ website:
     google-analytics: 'G-S78JRQSZER'
 ---
 
-Situation: you start very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and then you try to transfer all of the data to your computer, and then you see that, bleh, you don't have enough storage on your computer. Then what?
+Situation: you start your bioinformatics project very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and then you try to transfer all of the data to your computer, and then you see that, bleh, you don't have enough storage on your computer. Then what?
 
 You start panicking? No!
 
 You start searching the web for any information on that, and come up with a gazillion new terms that you have never heard before. _Server_, _cluster_, _cloud computing_, _ssh_, _ssd_, _bucket_, to enumerate a few. And now you panic for real.
 
-![](DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp){width=50%}.
+![](first_image.png){width=50%}.
 
 Don't worry, I am here to help! I'll get straight to the point about the options available to tackle this problem when working with big data in bioinformatics.
 
@@ -53,5 +54,3 @@ Another way of doing this, generally in less experienced labs, is by requesting 
 As important as it might sound, calculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post. It depends on too many factors.
 
 I hope this post has helped you on your bioinformatics journey!
-
-Did I miss any important points? Let me know in the comments below if you have something to add to this post!
