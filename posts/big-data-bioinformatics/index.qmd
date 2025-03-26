@@ -7,7 +7,7 @@ website:
     google-analytics: 'G-S78JRQSZER'
 ---
 
-Situation: you start very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and then you try to transfer all of the data to your computer, and then you see that, bleh, you don't have enough storage on your computer. Then what?
+Situation: you start your bioinformatics project very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and then you try to transfer all of the data to your computer, and then you see that, bleh, you don't have enough storage on your computer. Then what?
 
 You start panicking? No!
 
@@ -53,5 +53,3 @@ Another way of doing this, generally in less experienced labs, is by requesting 
 As important as it might sound, calculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post. It depends on too many factors.
 
 I hope this post has helped you on your bioinformatics journey!
-
-Did I miss any important points? Let me know in the comments below if you have something to add to this post!
