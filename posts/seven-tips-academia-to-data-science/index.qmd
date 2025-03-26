@@ -1,5 +1,5 @@
 ---
-title: "7 tips for academic researchers on their way to Data Science"
+title: "7 tips for Academic Researchers on Their Way To Data Science"
 author: "Flávia E. Rius"
 date: "2022-08-10"
 categories: [data science, R, PhD, academia]

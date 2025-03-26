@@ -1,5 +1,5 @@
 ---
-title: 'How to operate large files in bioinformatics'
+title: 'How To Operate Large Files in Bioinformatics'
 image: 'first_image.png'
 author: 'Flávia E. Rius'
 date: '2025-03-25'

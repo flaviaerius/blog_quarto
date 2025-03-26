@@ -5,8 +5,8 @@ website:
   announcement:
     icon: laptop
     dismissable: true
-    content: '**New post! Operating Large Files in Bioinformatics**'
-    type: primary
+    content: '**New post! How To Operate Large Files in Bioinformatics**'
+    type: light
     position: below-navbar
   title: "Flávia E. Rius Blog"
   site-url: "https://flaviaerius.com/"
