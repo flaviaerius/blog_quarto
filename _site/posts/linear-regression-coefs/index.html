@@ -5072,7 +5072,7 @@ fb(d(r,u)),w=0;w<t.length;++w)b(t[w],u,v)}function f(r,u,v,t){var w=d(r,u);b(w,u
 n[p];f(q,"first_name",aj,p);f(q,"last_name",aj,p);f(q,"street",bj,p);f(q,"city",bj,p);f(q,"postal_code",cj,p);f(q,"region",bj,p);f(q,"country",cj,p)}return k},dj=function(a){var b=a?Ki(a):[];return Ui({Xd:b})},ej=function(a){return a&&a!=null&&Object.keys(a).length>0&&z.Promise?Ki(a).some(function(b){return b.value&&Oi.indexOf(b.name)!==-1&&!Bi.test(b.value)}):!1},Xi=function(a){return a==null?"":db(a)?pb(String(a)):"e0"},cj=function(a){return a.replace(fj,"")},aj=function(a){return bj(a.replace(/\s/g,
 ""))},bj=function(a){return pb(a.replace(gj,"").toLowerCase())},$i=function(a){a=a.replace(/[\s-()/.]/g,"");a.charAt(0)!=="+"&&(a="+"+a);return hj.test(a)?a:"e0"},Zi=function(a){var b=a.toLowerCase().split("@");if(b.length===2){var c=b[0];/^(gmail|googlemail)\./.test(b[1])&&(c=c.replace(/\./g,""));c=c+"@"+b[1];if(ij.test(c))return c}return"e0"},Ti=function(a){if(!a.some(function(c){return c.value&&Oi.indexOf(c.name)!==-1}))return Promise.resolve({Xd:a});if(!z.Promise)return Promise.resolve({Xd:[]});
 var b;K(57)&&(b=Kc());return Promise.all(a.map(function(c){return c.value&&Oi.indexOf(c.name)!==-1?Di(c.value).then(function(d){c.value=d}):Promise.resolve()})).then(function(){var c={Xd:a};if(b!==void 0){var d=Kc();b&&d&&(c.time=Math.round(d)-Math.round(b))}return c}).catch(function(){return{Xd:[]}})},gj=/[0-9`~!@#$%^&*()_\-+=:;<>,.?|/\\[\]]/g,ij=/^\S+@\S+\.\S+$/,hj=/^\+\d{10,15}$/,fj=/[.~]/g,Pi=/^[0-9A-Za-z_-]{43}$/,jj={},Mi=(jj.email="em",jj.phone_number="pn",jj.first_name="fn",jj.last_name="ln",
-jj.street="sa",jj.city="ct",jj.region="rg",jj.country="co",jj.postal_code="pc",jj.error_code="ec",jj),kj={},Yi=(kj.email="sha256_email_address",kj.phone_number="sha256_phone_number",kj.first_name="sha256_first_name",kj.last_name="sha256_last_name",kj.street="sha256_street",kj);var Oi=Object.freeze(["email","phone_number","first_name","last_name","street"]);var lj={Ih:"53o2"};lj.Hh=Number("0")||0;lj.zb="dataLayer";lj.io="ChEI8MuOvwYQ6ffo3YPLl+mFARIlABHevkwNO3N2f4lDSSxMxA9jq90x5cXvJDsVrTzFYPeqD0ENdxoCImY\x3d";var mj={__cl:1,__ecl:1,__ehl:1,__evl:1,__fal:1,__fil:1,__fsl:1,__hl:1,__jel:1,__lcl:1,__sdl:1,__tl:1,__ytl:1},nj={__paused:1,__tg:1},oj;for(oj in mj)mj.hasOwnProperty(oj)&&(nj[oj]=1);var pj=nb("true"),qj=!1,rj,sj=!1;sj=!0;rj=sj;var tj,uj=!1;tj=uj;var vj,wj=!1;vj=wj;lj.Pf="www.googletagmanager.com";var xj=""+lj.Pf+(rj?"/gtag/js":"/gtm.js"),yj=null,zj=null,Aj={},Bj={};lj.rl="";var Cj="";lj.Jh=Cj;
+jj.street="sa",jj.city="ct",jj.region="rg",jj.country="co",jj.postal_code="pc",jj.error_code="ec",jj),kj={},Yi=(kj.email="sha256_email_address",kj.phone_number="sha256_phone_number",kj.first_name="sha256_first_name",kj.last_name="sha256_last_name",kj.street="sha256_street",kj);var Oi=Object.freeze(["email","phone_number","first_name","last_name","street"]);var lj={Ih:"53o2"};lj.Hh=Number("0")||0;lj.zb="dataLayer";lj.io="ChEI8MuOvwYQ6ffo3YPLl+mFARIlABHevkw46JeWG9+Zlxtp4h1INezuz4+Zz0+j0ZG4RQqcRolg9RoCuUg\x3d";var mj={__cl:1,__ecl:1,__ehl:1,__evl:1,__fal:1,__fil:1,__fsl:1,__hl:1,__jel:1,__lcl:1,__sdl:1,__tl:1,__ytl:1},nj={__paused:1,__tg:1},oj;for(oj in mj)mj.hasOwnProperty(oj)&&(nj[oj]=1);var pj=nb("true"),qj=!1,rj,sj=!1;sj=!0;rj=sj;var tj,uj=!1;tj=uj;var vj,wj=!1;vj=wj;lj.Pf="www.googletagmanager.com";var xj=""+lj.Pf+(rj?"/gtag/js":"/gtm.js"),yj=null,zj=null,Aj={},Bj={};lj.rl="";var Cj="";lj.Jh=Cj;
 var Dj=function(){this.C=new Set},Fj=function(){var a=Ej.U,b=Fi.fo;a.C=new Set;if(b!=="")for(var c=l(b.split("~")),d=c.next();!d.done;d=c.next()){var e=Number(d.value);isNaN(e)||a.C.add(e)}},Ej=new function(){this.U=new Dj;this.C=!1;this.H=0;this.xa=this.jb=this.Bc=this.O="";this.da=this.N=!1};function Gj(a){var b=a=a===void 0?[]:a,c=Ej.U;b=b===void 0?[]:b;return Array.from(c.C).concat(b).join("~")}function Hj(){var a=Ej.O.length;return Ej.O[a-1]==="/"?Ej.O.substring(0,a-1):Ej.O}
 function Ij(){return Ej.C?K(75)?Ej.H===0:Ej.H!==1:!1}function Jj(a){for(var b={},c=l(a.split("|")),d=c.next();!d.done;d=c.next())b[d.value]=!0;return b};var Kj=new jb,Lj={},Mj={},Pj={name:lj.zb,set:function(a,b){$c(yb(a,b),Lj);Nj()},get:function(a){return Oj(a,2)},reset:function(){Kj=new jb;Lj={};Nj()}};function Oj(a,b){return b!=2?Kj.get(a):Qj(a)}function Qj(a,b){var c=a.split(".");b=b||[];for(var d=Lj,e=0;e<c.length;e++){if(d===null)return!1;if(d===void 0)break;d=d[c[e]];if(b.indexOf(d)!==-1)return}return d}function Rj(a,b){Mj.hasOwnProperty(a)||(Kj.set(a,b),$c(yb(a,b),Lj),Nj())}
 function Sj(){for(var a=["gtm.allowlist","gtm.blocklist","gtm.whitelist","gtm.blacklist","tagTypeBlacklist"],b=0;b<a.length;b++){var c=a[b],d=Oj(c,1);if(Array.isArray(d)||Zc(d))d=$c(d,null);Mj[c]=d}}function Nj(a){kb(Mj,function(b,c){Kj.set(b,c);$c(yb(b),Lj);$c(yb(b,c),Lj);a&&delete Mj[b]})}function Tj(a,b){var c,d=(b===void 0?2:b)!==1?Qj(a):Kj.get(a);Xc(d)==="array"||Xc(d)==="object"?c=$c(d,null):c=d;return c};
@@ -5568,13 +5568,13 @@ gtag('config', 'G-S78JRQSZER', { 'anonymize_ip': true});
 
 <meta property="og:title" content="Understand Linear Regression Results in R – Flávia E. Rius Blog">
 <meta property="og:description" content>
-<meta property="og:image" content="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/linear-regression-plot-1.png">
+<meta property="og:image" content="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png">
 <meta property="og:site_name" content="Flávia E. Rius Blog">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="960">
 <meta name="twitter:title" content="Understand Linear Regression Results in R – Flávia E. Rius Blog">
 <meta name="twitter:description" content>
-<meta name="twitter:image" content="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/linear-regression-plot-1.png">
+<meta name="twitter:image" content="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png">
 <meta name="twitter:creator" content="@flaviaerius">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="960">
@@ -5625,8 +5625,8 @@ gtag('config', 'G-S78JRQSZER', { 'anonymize_ip': true});
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <div id="quarto-announcement" data-announcement-id="97039451700235839411229103b8650d" class="alert alert-primary hidden"><i class="bi bi-laptop quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p><strong>New post! Operating Large Files in Bioinformatics</strong></p>
+  <div id="quarto-announcement" data-announcement-id="212ec45ca8f064ec3d0721c1c5c68928" class="alert alert-light hidden"><i class="bi bi-laptop quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p><strong>New post! How To Operate Large Files in Bioinformatics</strong></p>
 </div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
@@ -5789,7 +5789,7 @@ F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
 <h2 class="anchored" data-anchor-id="metrics-and-statistics">Metrics and statistics</h2>
 <p>While <strong>metrics</strong> are the values to measure performance of the overall model, <strong>statistics</strong> are the coefficients of hypothesis tests and estimates of each variable. Below they will be explained.</p>
 <p>To visualize some parts of the explanation, the linear regression plot will be illustrated below.</p>
-<div class="cell preview-image">
+<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
