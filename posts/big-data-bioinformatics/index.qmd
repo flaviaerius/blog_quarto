@@ -13,7 +13,7 @@ You start panicking? No!
 
 You start searching the web for any information on that, and come up with a gazillion new terms that you have never heard before. _Server_, _cluster_, _cloud computing_, _ssh_, _ssd_, _bucket_, to enumerate a few. And now you panic for real.
 
-![](DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp){fig-alt="A beginner bioinformatician worried about operating large files" width=50%}.
+![](DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp){width=50%}.
 
 Don't worry, I am here to help! I'll get straight to the point about the options available to tackle this problem when working with big data in bioinformatics.
 
