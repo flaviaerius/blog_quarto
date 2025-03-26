@@ -43,14 +43,17 @@ After finishing your analysis, you need to deal with the resulting data. Let's t
 ## Server/cluster in your university
 ![Photo by <a href="https://unsplash.com/@tvick?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Taylor Vick</a> on <a href="https://unsplash.com/photos/cable-network-M5tzZtFCOfs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>](server-unsplash.jpg){width=70%}
 
-In this option there are two different ways that a server might be provided to you: via a job schedule strategy or by giving you access to a slice of this server.
+In this option there are two different ways that a server might be provided to you: via a **job schedule strategy** or by giving you access to a **slice of this server**.
 
+
+### Job schedule strategy
 A server, as the instance in the cloud computing resource, is a remote computer to which you have access. The job schedule strategy requires you to learn how to structure your data and then you need to write your scripts and submit them to the job scheduler, then wait for your turn to run them, as other people send their jobs to the scheduler too. The most popular examples are Slurm and SGE.
 
-Generally there is a free limited space (scratch) of the server for you to experiment with a slice of the data (so you are certain that your script is correct to send to schedule for example). Some more complex labs allow you to send to a specific server schedule line, depending on your demand of cpu and processing. These are aspects you may require by task as well when submitting your job to the scheduler.
+Generally there is a free limited space (scratch) of the server for you to experiment with a slice of the data (so you are certain that your script is correct to send to schedule for example). Some more complex labs allow you to send to a specific server schedule line, depending on your demand of CPU (or GPU) and memory. These are aspects you may require by task as well when submitting your job to the scheduler.
 
-Another way of doing this, generally in less experienced labs, is by requesting a specific slice of the server available in the university for you to use during your full project. In my PhD I knew that I could have asked for it in my university, but I did not have a bit of idea on what would be my CPU, RAM memory and storage needs. Therefore I could not get it. I still relied on my collaborator server to finish my analyses. So this is an important knowledge to have.
+### Using a slice of the server
+Another way of doing this, generally in less experienced labs, is by requesting a specific slice of the server available in the university for you to use during your full project. That would be: "I need 100GB disk with 16GB of memory and 4 CPU to run my analysis". In my PhD I knew that I could have asked for it in my university, but I did not have a bit of idea on what would be my CPU, RAM memory and storage needs. Therefore I could not get it. I still relied on my collaborator's server to finish my analyses. So this is an important knowledge to have.
 
-As important as it might sound, calculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post. It depends on too many factors.
+Calculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post.
 
 I hope this post has helped you on your bioinformatics journey!
