@@ -85,6 +85,7 @@ While __metrics__ are the values to measure performance of the overall model, __
 To visualize some parts of the explanation, the linear regression plot will be illustrated below.
 
 ```{r, echo = F}
+#| classes: preview-image
 mtcars %>% 
   ggplot(aes(wt, mpg)) +
   geom_point() +

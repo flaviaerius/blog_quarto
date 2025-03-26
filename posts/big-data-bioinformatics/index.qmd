@@ -1,5 +1,6 @@
 ---
 title: 'How to operate large files in bioinformatics'
+image: 'first_image.png'
 author: 'Flávia E. Rius'
 date: '2025-03-25'
 categories: [bioinformatics, cloud computing]
