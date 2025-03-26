@@ -21,10 +21,9 @@ website:
 format:
   html:
     smooth-scroll: true
+    lazy-load-images: true
     theme: darkly
     toc: true
-
-comments:
-  giscus:
-    theme: dark_dimmed
-    repo: flaviaerius/blog_quarto
+    embed-resources: true
+    self-contained: true
+    highlight-style: github

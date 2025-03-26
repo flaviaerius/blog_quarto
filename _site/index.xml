@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Flávia E. Rius</title>
+<link>https://flaviaerius.com/</link>
+<atom:link href="https://flaviaerius.com/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.6.40</generator>
+<lastBuildDate>Tue, 11 Feb 2025 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>How to operate large files in bioinformatics</title>
+  <dc:creator>Flávia E. Rius</dc:creator>
+  <link>https://flaviaerius.com/posts/big-data-bioinformatics/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Situation: you start very happy that you will be analyzing your sequencing data, be it transcriptomic, genomic or epigenomic; you have learned bash, R and statistics, and then you try to transfer all of the data to your computer, and then you see that, bleh, you don’t have enough storage on your computer. Then what?</p>
+<p>You start panicking? No!</p>
+<p>You start searching the web for any information on that, and come up with a gazillion new terms that you have never heard before. <em>Server</em>, <em>cluster</em>, <em>cloud computing</em>, <em>ssh</em>, <em>ssd</em>, <em>bucket</em>, to enumerate a few. And now you panic for real.</p>
+<p><img src="https://flaviaerius.com/posts/big-data-bioinformatics/DALL·E 2025-02-18 21.49.29 - A beginner programmer sitting nervously in front of a large computer screen filled with complex lines of code. The person, wearing casual clothes, has.webp" class="img-fluid" style="width:50.0%" alt="A beginner bioinformatician worried about operating large files">.</p>
+<p>Don’t worry, I am here to help! I’ll get straight to the point about the options available to tackle this problem when working with big data in bioinformatics.</p>
+<p>Basically you have two main options:</p>
+<ul>
+<li><p>Cloud computing</p></li>
+<li><p>Server/cluster of your institution (when available)</p></li>
+</ul>
+<section id="cloud-computing" class="level2">
+<h2 class="anchored" data-anchor-id="cloud-computing">Cloud computing</h2>
+<p>These are the services provided by companies in which you can pay for a temporary remote machine to run your analyses. Google Cloud, Amazon AWS and Azure are the most well-known providers of this type of service. Basically you need to create an account, link to a payment method, and start using it.</p>
+<p>If this is your option, you need to learn the basics of analyzing data in the cloud. I would go with the simplest way, which is creating an instance. An instance is nothing more than a computer you configure remotely. You need to pick a size of CPU, RAM memory and storage, which can be HDD (popularly known as HD, cheaper and slower) or SSD (faster to transfer data, but more expensive). Then, you just transfer your data to the instance using wget or ssh, depending on where this data will come from, and you can work from there (using the command line, of course).</p>
+<section id="google-cloud-compute-engine" class="level3">
+<h3 class="anchored" data-anchor-id="google-cloud-compute-engine">Google Cloud Compute Engine</h3>
+<p>Below I will give you some details on how to do this on Google Cloud Compute Engine. They give $300 of free credits to new Google Cloud users, so you can test and potentially do the analysis you need for free. To give you an idea of costs, a general use machine with 4 CPUs, 15GB of memory (RAM) and 100GB of HDD storage, running for 30 days <a href="https://shorturl.at/I9eY2">would cost you 140 USD</a>. You can calculate the expected amount for your personalized needs in the calculator page.</p>
+<p>After setting up your instance and transferring the data, you need to install all software needed to run your analyses from scratch. For example, let’s say that you want to run an RNA-seq alignment using STAR. You will need to install STAR, transfer the reference genome or transcriptome to the instance, build the reference for this program, and then run it. Don’t forget that any other tools you might need for previous steps such as QC must be installed to the instance too. After all, <strong>it is a new computer you are renting for a limited time</strong>.</p>
+<p>After finishing your analysis, you need to deal with the resulting data. Let’s talk about this in another post, because it is a topic that deserves better attention.</p>
+</section>
+</section>
+<section id="servercluster-in-your-university" class="level2">
+<h2 class="anchored" data-anchor-id="servercluster-in-your-university">Server/cluster in your university</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://flaviaerius.com/posts/big-data-bioinformatics/server-unsplash.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Photo by <a href="https://unsplash.com/@tvick?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Taylor Vick</a> on <a href="https://unsplash.com/photos/cable-network-M5tzZtFCOfs?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash">Unsplash</a></figcaption>
+</figure>
+</div>
+<p>In this option there are two different ways that a server might be provided to you: via a job schedule strategy or by giving you access to a slice of this server.</p>
+<p>A server, as the instance in the cloud computing resource, is a remote computer to which you have access. The job schedule strategy requires you to learn how to structure your data and then you need to write your scripts and submit them to the job scheduler, then wait for your turn to run them, as other people send their jobs to the scheduler too. The most popular examples are Slurm and SGE.</p>
+<p>Generally there is a free limited space (scratch) of the server for you to experiment with a slice of the data (so you are certain that your script is correct to send to schedule for example). Some more complex labs allow you to send to a specific server schedule line, depending on your demand of cpu and processing. These are aspects you may require by task as well when submitting your job to the scheduler.</p>
+<p>Another way of doing this, generally in less experienced labs, is by requesting a specific slice of the server available in the university for you to use during your full project. In my PhD I knew that I could have asked for it in my university, but I did not have a bit of idea on what would be my CPU, RAM memory and storage needs. Therefore I could not get it. I still relied on my collaborator server to finish my analyses. So this is an important knowledge to have.</p>
+<p>As important as it might sound, calculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post. It depends on too many factors.</p>
+<p>I hope this post has helped you on your bioinformatics journey!</p>
+<p>Did I miss any important points? Let me know in the comments below if you have something to add to this post!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>bioinformatics</category>
+  <category>cloud computing</category>
+  <guid>https://flaviaerius.com/posts/big-data-bioinformatics/</guid>
+  <pubDate>Tue, 11 Feb 2025 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Understand Linear Regression Results in R</title>
+  <dc:creator>Flávia E. Rius</dc:creator>
+  <link>https://flaviaerius.com/posts/linear-regression-coefs/</link>
+  <description><![CDATA[ 
+
+
+
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> b15fa15 (t)
+<p>In this post I will write about the statistics and metrics of linear regression for you to finally understand all of the output from <code>summary()</code> R function applied to an <code>lm()</code> object, in a very practical way.</p>
+<p><strong>Disclaimer</strong>: I am <strong>NOT</strong> a statistician, so to all statisticians out there, I apologize for any misused term. My intention here is just to let people interpret their own regression models and <strong>understand</strong> what is going on with their data in a practical way.</p>
+<section id="about-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="about-linear-regression">About linear regression</h2>
+<p>There are two main uses of linear regression: statistical inference and prediction.</p>
+<p>In the statistical inference line, a <strong>linear regression</strong> is performed to find a relationship of a dependent continuous variable and one or more variables of any type (continuous or categorical). You can, then, <strong>explain</strong> a relationship between variables.</p>
+<p>As a predictive point of view, regression is a part of <strong>supervised learning</strong>, a type of <strong>machine learning</strong>, and can be used to predict new data based on the relationship found between two variables.</p>
+<p>These two approaches are not mutually exclusive, they can be used together. You can both explain the relationship between variables and use your model to predict with new data input.</p>
+<p>For more insights on this difference, I recommend <a href="https://www.nature.com/articles/nmeth.4642.pdf?ssp=1&amp;darkschemeovr=1&amp;setlang=pt-BR&amp;safesearch=moderate">this brief Nature discussion and example on RNA-seq data</a>, especially the first four paragraphs.</p>
+<p>Concerning the prior assumptions to perform a linear model, such as <strong>linearity</strong> and <strong>normality</strong> of the variables, mainly, this is a very discussed topic among statisticians and data scientists. In the <strong>machine learning</strong> side, the assumptions do not matter that much if the model has a good application in predicting the variable of interest. And for the inference side, the assumptions are more important for the model inference to be correct, but they are not written in stone. For example, <a href="https://www.annualreviews.org/doi/pdf/10.1146/annurev.publhealth.23.100901.140546">not normally distributed variables might work well in a t-test or linear regression for a large sample size</a>. At the same time, to perform linear regressions on gene expression data from RNA-seq, there are several transformations made in the data so it can be normal, linear, and homoskedastic.</p>
+<p>As I said, it is a very much discussed topic and I suggest that you read more about your area of application to decide if you should check for assumptions or not. I won’t dive into assumptions in this post.</p>
+</section>
+<section id="running-the-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-linear-regression">Running the linear regression</h2>
+<p>First of all, we need an analysis.</p>
+<p>We’ll use the most classic dataset of R: <code>mtcars</code>. It contains measures as weight, miles per gallon, number of cylinders, etc, of 32 models of cars from 1974. You can explore the dataset more by typing <code>?mtcars</code> in your R console.</p>
+<p>Let’s check the variables distribution overall:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(mtcars)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg             cyl             disp             hp       
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+      drat             wt             qsec             vs        
+ Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+ 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+ Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+ Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+ 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+ Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+       am              gear            carb      
+ Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+ 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+ Median :0.0000   Median :4.000   Median :2.000  
+ Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+ 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+ Max.   :1.0000   Max.   :5.000   Max.   :8.000  </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>They are all numeric, but <code>am</code> and <code>vs</code> seem to be binary, and some seem to be categorical, as <code>carb</code> and <code>cyl</code>.</p>
+<p>In our analysis to demonstrate the linear regression metrics and statistics, our <strong>question</strong> will be:</p>
+<blockquote class="blockquote">
+<p>Does the weight of a car influences in how many miles it can go per gallon of gas?</p>
+</blockquote>
+<p>To answer that, we will use the predictor (independent variable) <strong>weight</strong> or <code>wt</code> and the predicted (dependent variable) <strong>miles per gallon</strong> or <code>mpg</code>.</p>
+<p>Let’s fit the model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(mpg <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> wt, mtcars)</span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>To obtain all statistics and some of the metrics for our model, we need to use the function <code>summary()</code> in R.</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(fit) </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ wt, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.5432 -2.3647 -0.1252  1.4096  6.8727 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.046 on 30 degrees of freedom
+Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
+F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Okay, so we have this ocean of information and how can we answer our question? p value is low, and all three stars for coefficients, this seems nice.</p>
+<p>Let’s see one by one, by order of appearance in the output of <code>summary(fit)</code>.</p>
+</section>
+<section id="metrics-and-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="metrics-and-statistics">Metrics and statistics</h2>
+<p>While <strong>metrics</strong> are the values to measure performance of the overall model, <strong>statistics</strong> are the coefficients of hypothesis tests and estimates of each variable. Below they will be explained.</p>
+<p>To visualize some parts of the explanation, the linear regression plot will be illustrated below.</p>
+<div class="cell">
+<div class="cell-output-display">
+<<<<<<< HEAD
+<p><img src="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+=======
+<div>
+<figure class="figure">
+<p><img src="https://flaviaerius.com/posts/linear-regression-coefs/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+>>>>>>> b15fa15 (t)
+</div>
+</div>
+<section id="residuals" class="level3">
+<h3 class="anchored" data-anchor-id="residuals"><strong>1. Residuals</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Residuals:</span></span>
+<span id="cb6-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># -4.5432 -2.3647 -0.1252  1.4096  6.8727 </span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>“Residual” was a term invented because an executive of a drug industry didn’t want to admit having “error” in their data when sending it to FDA (you can find this info on page 239 of the book <a href="https://www.goodreads.com/book/show/106350.The_Lady_Tasting_Tea?from_search=true&amp;from_srp=true&amp;qid=x3RuL9nMWd&amp;rank=1">The Lady Tasting Tea</a>). So yes, these are <strong>the “errors” of your model</strong>. Not that there is something wrong, but the fitted line is not perfect, there are deviations from it to your real data because other factors and randomness affect your predicted variable (<code>mpg</code>) too. Those deviations are the residuals.</p>
+<p>They are calculated subtracting the predicted data from the observed data. In our case, predicted (obtained using the model) miles per gallon minus observed (from <code>mtcars</code>) miles per gallon.</p>
+<p>To see all of them, instead of a summary, run:</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">resid</span>(fit)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Mazda RX4       Mazda RX4 Wag          Datsun 710      Hornet 4 Drive 
+         -2.2826106          -0.9197704          -2.0859521           1.2973499 
+  Hornet Sportabout             Valiant          Duster 360           Merc 240D 
+         -0.2001440          -0.6932545          -3.9053627           4.1637381 
+           Merc 230            Merc 280           Merc 280C          Merc 450SE 
+          2.3499593           0.2998560          -1.1001440           0.8668731 
+         Merc 450SL         Merc 450SLC  Cadillac Fleetwood Lincoln Continental 
+         -0.0502472          -1.8830236           1.1733496           2.1032876 
+  Chrysler Imperial            Fiat 128         Honda Civic      Toyota Corolla 
+          5.9810744           6.8727113           1.7461954           6.4219792 
+      Toyota Corona    Dodge Challenger         AMC Javelin          Camaro Z28 
+         -2.6110037          -2.9725862          -3.7268663          -3.4623553 
+   Pontiac Firebird           Fiat X1-9       Porsche 914-2        Lotus Europa 
+          2.4643670           0.3564263           0.1520430           1.2010593 
+     Ford Pantera L        Ferrari Dino       Maserati Bora          Volvo 142E 
+         -4.5431513          -2.7809399          -3.2053627          -1.0274952 </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>It is possible to <strong>explore the residuals</strong> checking them for some assumptions of a linear regression, and hidden patterns in the data. This is a very long topic, so it will be left to another post.</p>
+</section>
+<section id="coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="coefficients"><strong>2. Coefficients</strong></h3>
+<p>Overall, the coefficients contain information about the predictors of your dependent variable. Below you can see a detailed explanation.</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Coefficients:</span></span>
+<span id="cb9-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb9-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***</span></span>
+<span id="cb9-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># wt           -5.3445     0.5591  -9.559 1.29e-10 ***</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>a. Intercept</strong></p>
+<p>Intercept is the mean value of y when x is 0 in our model. In our example, how many miles a gallon would make in average for a car with <strong>zero lbs</strong>. Also represented as β0 in the linear regression equation:</p>
+<p><strong>y = β0 + β1x + ε</strong></p>
+<p>In our example it makes no sense at all. There is no car with 0 lbs. Therefore we can just ignore it and interpret the coefficient of interest, β1.</p>
+<p><strong>b. wt</strong></p>
+<p>Represented by the variable name, this is the angular coefficient, β1. It represents the slope of the line in the linear regression plot. This is how much <strong>y</strong> increases or decreases with the increase of <strong>one unit of x</strong>. In our example, it is how many <strong>miles per gallon</strong> <em>decreases</em> (estimate is negative = -5.3) with the <em>increase</em> of each <strong>1000 lb weight</strong> (unit of measure of wt) of the car.</p>
+<p>The columns for the coefficients are:</p>
+<p><strong>I. Estimate</strong></p>
+<p>Estimates are the values per se of β0 (<code>Intercept</code>) and β1 (<code>wt</code>). The explanation of them is above.</p>
+<p><strong>II. Std Error</strong></p>
+<p>Standard Error is the deviation of the estimate from its real value. The smallest this value is, more precise the estimate is. It tends to be smaller if you have a big number of observations, since it is the standard deviation divided by n.&nbsp;</p>
+<p><strong>III. t value</strong></p>
+<p>This is the value of t in the Student’s t test for one sample. The alternative hypothesis tested is: is your estimate different than zero?, which relies on the distribution of your data being a t distribution, which is very close to a normal distribution. It is calculated by Estimate/Std Error.</p>
+<p><strong>IV. Pr(&gt;|t|)</strong></p>
+<p>This is the <strong>p value</strong> for the t test applied to your estimate. If it is less than the considered alpha - the error you choose to accept (generally 0.05) - then you can say your estimates are very likely to be significant.</p>
+</section>
+<section id="signif.-codes" class="level3">
+<h3 class="anchored" data-anchor-id="signif.-codes"><strong>3. Signif. codes</strong></h3>
+<p>This is just a legend for what the asterisks and dot mean concerning level of significance for the p values.</p>
+</section>
+<section id="degrees-of-freedom" class="level3">
+<h3 class="anchored" data-anchor-id="degrees-of-freedom"><strong>4. Degrees of freedom</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 30 degrees of freedom</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Degrees of freedom</strong> (<strong>DF</strong>) are how many units of your data are “free to vary”.</p>
+<p>Practically, this is how many observations you have minus the number of estimated parameters used in your model (in this case, intercept and weight). Which means that it is directly proportional to the number of samples, and inversely proportional to the number of parameters and variables in your analysis. Degrees of freedom are crucial to determine your t distribution shape and what will be the significance (p value) of the estimates.</p>
+</section>
+<section id="residual-standard-error" class="level3">
+<h3 class="anchored" data-anchor-id="residual-standard-error"><strong>5. Residual standard error</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Residual standard error: 3.046</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p><strong>Residual standard error</strong> (<strong>RSE</strong>) is the average deviation of predicted values (from the model) from observed values (the ones in your dataset).</p>
+<p>It can be calculated with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> mtcars<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mpg</span>
+<span id="cb12-2">y_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">predict</span>(fit)</span>
+<span id="cb12-3">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># degrees of freedom</span></span>
+<span id="cb12-4"></span>
+<span id="cb12-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>((y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y_hat)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>df)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.045882</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Statistically speaking, it is the estimate of standard deviation of predicted values from real values; a measure of variation around the regression line.</p>
+<p>Confidence intervals around predicted values are generated using the <strong>RSE</strong>, therefore it is an important metric of your model. Large <strong>RSE</strong> can generate inaccurate predictions.</p>
+</section>
+<section id="multiple-r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-r-squared"><strong>6. Multiple R-squared</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Multiple R-squared:  0.7528</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>This is the famous R squared (R²). The proportion of variance of your dependent variable, y, which is explained by your model. Simplifying: proportion of variance explained.</p>
+<p>Since it is a proportion, its value is between 0 and 1.</p>
+<p>Our model explains 75% of variance in miles per gallon.</p>
+<p>This does not mean that if you have an R² = 0.3 for example you have a poor regression analysis. Some variables are just partly explained by the predictor analyzed, and if your intention is to interpret the influence of a predictor in a response variable, it may be useful even with a low variance explained. This happens in genomics, with polygenic scores for example, when your analyzed genetics explains only a part of a trait or disease, while the rest is explained by other factors such as environment.</p>
+<p>Also, this is not the best way to analyze if your model is good or not. <code>RMSE</code> (Root Mean Squared Error), which is just squaring residuals, averaging them, and getting the square root, is generally a better way to evaluate whether you have a less prone to errors model. The smallest the RMSE, the better your model is.</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">RMSE <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">resid</span>(fit)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb15-2"></span>
+<span id="cb15-3">RMSE</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.949163</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>That means that in average there is an error of 2.9 miles per gallon in our model.</p>
+<p>Have in mind what my boss always repeats: “All models are wrong, but some are useful”, a classical phrase by George Box.</p>
+</section>
+<section id="adjusted-r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-r-squared"><strong>7. Adjusted R-Squared</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Adjusted R-squared:  0.7446</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>When there is more than one predictor in your linear regression (multiple linear regression), there is always an increase in R² independent of increase in variance explained, due to just the addittion of a new predictor. Therefore the R² value is adjusted for that.</p>
+<p>To compare multiple linear regression models, or models with different number of predictors, it is recommended to check adjusted R-squared instead of multiple R-squared for variance explained.</p>
+</section>
+<section id="f-statistic" class="level3">
+<h3 class="anchored" data-anchor-id="f-statistic"><strong>8. F-statistic</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># F-statistic: 91.38 on 1 and 30 DF</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>F is the statistic from the F-test performed in your model. Basically the F value is used to see if there is any relationship between the response and predictors in a <strong>multiple linear regression</strong>. In the example discussed here, a simple linear regression, the estimate β1 = 0 is a better way to tell that there is no relationship between the response and predictor.</p>
+</section>
+<section id="p-value" class="level3">
+<h3 class="anchored" data-anchor-id="p-value"><strong>9. p-value</strong></h3>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># p-value: 1.294e-10</span></span></code></pre></div>
+</div>
+<p>&nbsp;</p>
+<p>This is the F-test p-value, which tells you if your F-test is significant. A p-value below the alpha you choose (for example, 0.05) means there is a high chance that at least one of your predictors is significantly associated with your dependent variable. It is more used for multiple regression models, which can be approached in another blog post.</p>
+</section>
+</section>
+<section id="interpretation-concerns" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-concerns">Interpretation concerns</h2>
+<p>Some transformations can be used in the linear regression to make your model more interpretable.</p>
+<p>For example, let’s say that, as me, you are not from a country that uses <em>lbs</em> as a weight metric, neither <em>miles</em> for a distance one, or <em>gallons</em> for a volume one.</p>
+<p>Instead, you would like to interpret your model using <em>kilograms</em>, <em>kilometers</em>, and <em>liters</em>. Is this possible?</p>
+<p><strong>Yes!</strong></p>
+<p>Using the <code>I()</code> operator around the terms of the linear regression, just so you can transform from inside of the <code>lm()</code> function, we can transform the terms and get the proper interpretation. See below:</p>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">miles_to_kilometers <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.61</span></span>
+<span id="cb20-2">gallons_to_liters <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.79</span></span>
+<span id="cb20-3">lb_to_kg <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.45</span></span>
+<span id="cb20-4"></span>
+<span id="cb20-5">fit_not_english <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">I</span>(mpg<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>miles_to_kilometers<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>gallons_to_liters) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">I</span>(wt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>lb_to_kg), mtcars)</span>
+<span id="cb20-6"></span>
+<span id="cb20-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(fit_not_english)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = I(mpg * miles_to_kilometers/gallons_to_liters) ~ 
+    I(wt * lb_to_kg), data = mtcars)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.92994 -1.00453 -0.05318  0.59878  2.91954 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       15.8388     0.7976  19.858  &lt; 2e-16 ***
+I(wt * lb_to_kg)  -5.0452     0.5278  -9.559 1.29e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.294 on 30 degrees of freedom
+Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
+F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>The interpretation is:</p>
+<ul>
+<li>There is a reduction of 5 kilometers per liter for each 1000kg increase in the car weight.</li>
+</ul>
+<p>Much better now, right?</p>
+<p>;)</p>
+</section>
+<section id="closing-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="closing-remarks">Closing remarks</h2>
+<p>I hope you have liked this post, and that it has shed light on you about how to interpret the regression models outputs from R.</p>
+<p>I really missed this content when I was applying linear regression in R, so I really hope it helps you as much as it would have helped me when I was looking for it!</p>
+</section>
+<section id="read-more" class="level2">
+<h2 class="anchored" data-anchor-id="read-more">Read more</h2>
+<ul>
+<li><p>Chapter 3.2 of the book <a href="https://www.statlearning.com/">An Introduction to Statistical Learning (Second Edition)</a> - you can pick the R or Python version to download <strong>for free</strong>.</p></li>
+<li><p><strong>Regression Models Coursera Course</strong> from Johns Hopkins <a href="https://github.com/bcaffo/regmodsbook"><strong>free GitHub content</strong></a>.</p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>data science</category>
+  <category>R</category>
+  <category>statistics</category>
+  <category>machine learning</category>
+  <category>supervised learning</category>
+  <category>regression</category>
+  <guid>https://flaviaerius.com/posts/linear-regression-coefs/</guid>
+  <pubDate>Thu, 20 Jul 2023 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>7 tips for academic researchers on their way to Data Science</title>
+  <dc:creator>Flávia E. Rius</dc:creator>
+  <link>https://flaviaerius.com/posts/seven-tips-academia-to-data-science/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Very often people ask me about my transition from <strong>academic research</strong> to a position as a <strong>data scientist</strong>. I have compiled in this article some advice to researchers in academia (masters degree, PhD, postdoctoral research) who want to be data scientists in the technology industry<sup>1</sup>.</p>
+<p>My focus of learning was in the genomics area, but the tips are useful for other areas too. When I got into my PhD program, I didn’t know the career of data scientist, so I focused in learning <strong>bioinformatics</strong>. The division between those two sciences in the genomics area is very tenuous. The bioinformatician has a bigger focus on the computational part, developing sequencing data analysis pipelines, software, and orchestrating the interface with data in the cloud. On the other hand, the data scientist is more focused in analyzing research and development (R&amp;D) data, building models, and in delivering information in the format of tables and graphs, which are necessary for development of a new product, or evaluation of a project. Both do a little bit of each other’s function, but basically, the distinction between them is the one I have explained.</p>
+<p>Below I will give you seven tips I have joined together based on my learning process and career transition from bench scientist (wet lab) to 100% computational researcher (dry lab), and, afterwards, to a position as a data scientist at Mendelics, the biggest company focused in genomic analysis of Latin America.</p>
+<section id="dont-give-up-on-learning-programming" class="level2">
+<h2 class="anchored" data-anchor-id="dont-give-up-on-learning-programming"><strong>1. Don’t give up on learning programming</strong></h2>
+<p>I’ve had SO much difficulty to learn R, my first scripts were awful, and I barely understood what I was doing. I started by only replicating tutorials, and, as the time passed, I tried to understand what the functions were doing, and the different rules of R. A small notebook was where I kept my notes about every new function I discovered. One colleague said to me, in an introduction to R course: “The learning curve is very slow in the beginning, but afterwards you get into the plateau phase, and it turns up very easy!”. She was right. Not that I know everything, but today is much easier to learn something new, now that I already know how R works basically.</p>
+</section>
+<section id="know-a-bit-about-computing" class="level2">
+<h2 class="anchored" data-anchor-id="know-a-bit-about-computing"><strong>2. Know a bit about computing</strong></h2>
+<p>To differentiate RAM memory from disk memory, and what is a processor are parts of the first steps for you to have an idea about computing. You will also need to have a notion of your machine’s capacity, and of the disk space that a file occupies, to architect about a way to manipulate it. Besides that, to know that the server is nothing more than another computer connected with yours by a “bridge” via ssh command, just as the access to cloud computing or storage. Nothing exists online-only. Several computers and disk units (HD or SSD) are present in fixed places and connected to your computer by “bridges”.</p>
+<p>I have used the online course <a href="https://en.wikiversity.org/wiki/Introduction_to_Computer_Science">Introduction to Computer Science</a>, from Wikiversity, to learn the basic concepts of computation in the beginning. To understand what is behind that black screen and of the commands will clear your mind tangled about so many unknown novelties.</p>
+</section>
+<section id="study-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="study-statistics"><strong>3. Study statistics</strong></h2>
+<p>Here, my advice is to study as the statistical tests appear in your project. Wanting to know absolutely everything about statistics won’t help, as it is such a vast area.</p>
+<p>Instead of that, try to understand the reason of each and every statistical test of your work. What question is the test trying to answer exactly? It seems like I am telling a trivial thing, that everybody knows, after all, the project belongs to the researcher working on it, but very often you are just copying what others have done, and do not understand what is happening there. This has happened with me sometimes. For example, the survival analysis I have used to understand the influence of some covariables in survival of melanoma patients was applied with a very shallow knowledge of mine in the beginning. But I went after understanding better about Hazard Ratio interpretation, and robustness of Cox regression (multivariate) compared to Kaplan-Meier (univariate), and, with that, acquired more knowledge about this statistical analysis. And, of course, I am still learning each day more about this fascinating area that is statistics.</p>
+</section>
+<section id="dont-try-to-complicate-the-simple" class="level2">
+<h2 class="anchored" data-anchor-id="dont-try-to-complicate-the-simple"><strong>4. Don’t try to complicate the simple</strong></h2>
+<p>It is like when you are learning a new language. If you are learning Spanish, you don’t need to use difficult words to speak, go with the simple, the vocabulary that you already know. With scripts it works the same way.</p>
+<p>Write the code as simple as possible, and aim at learning more complex functions and tools, such as <code>for</code> loops, <code>lapply</code> in case of R language, or <code>if</code> clauses. Of course you will use a lot of ctrl+c and ctrl+v on stackoverflow code that you have no idea on how it works, but that solves your problem. With time, you will start to search, read the documentation of that function, test it in other datasets, take out a variable, add another one, and learn what the function does. I recommend to include a to-do list with the abilities you want to acquire in R. I did that with the for loop. See the new function as a new word in a vocabulary, and the for loop structure as a new syntax. While you still don’t know how to shorten your lines of code, there is no problem in copying and pasting several times. If it works, go ahead!</p>
+</section>
+<section id="always-explore-the-data-you-are-analyzing" class="level2">
+<h2 class="anchored" data-anchor-id="always-explore-the-data-you-are-analyzing"><strong>5. Always explore the data you are analyzing</strong></h2>
+<p>This is a basic one, but I also didn’t use in the beginning. I used to analyze stuff by repeating tutorials and never taking a look at the start and intermediate data. If you use <code>head</code> command, see the columns your dataset has, number of lines, and if variables are numeric or not, minimum, maximum, and mean values, you have a better idea on what is happening in that tutorial you are replicating. Do it not only with the initial dataset, but also with the intermediate ones, and with the final. This way you will learn what is happening in each step of your data processing. Likewise observe new variables created, and the output of some functions in the console.</p>
+</section>
+<section id="learn-to-google-the-error-message" class="level2">
+<h2 class="anchored" data-anchor-id="learn-to-google-the-error-message"><strong>6. Learn to google the error message</strong></h2>
+<p>And also to search what you need to do with your code. As the time passes you learn the best way to search, and how to write the query to find what you want. I believe this is related to acquiring more vocabulary in the programming language you are dealing with. The error messages are unavoidable, and, unless they give you a clue that allow the solution to the problem (eg. class is numeric and you need a factor, in R), you will need to google them. Then you probably will run into an answer from <a href="https://stackoverflow.com/">stackoverflow</a>, from a <a href="https://github.com/tidyverse/ggplot2/issues/2252">github issue</a>, or even from a blog post about that type of error message, and how to fix it. Before publishing a question in stackoverflow, TURN THE INTERNET UPSIDE DOWN to know if someone hasn’t asked that before. Chances are 99% that the answer is already somewhere, especially when you are a beginner. If there is no such question, then it is OK for you to publish it.</p>
+</section>
+<section id="organize-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="organize-your-data"><strong>7. Organize your data</strong></h2>
+<p>It is important to have a structure that you understand, because a research needs reproducibility, and you inevitably will need to go back and run that script again, to make a small adjustment in the plots before submitting your manuscript to the journal, for example. So it is necessary that a logical structure of folders (directories) exists, and a documentation about where to find each important data of your research. This skill will be highly transfered to your data science job.</p>
+<p>Although it will be a lot of work, it is very important to have documentation. The organization may not be trivial in the beginning, but it is worth making an effort to structure your scripts and data in a certain moment. Your self from the future will be definitely very grateful.</p>
+<p>These are the tips I wanted to pass along. Undoubtedly I would have benefited if I have read them while I was learning, so I believe they may have a value to you, if you are learning as well. Certainly the abilities I have acquired following those tips are fundamental to what I do nowadays as a data scientist at Mendelics, and also as a mentor. Then, if you want to follow this path, and, as me, doesn’t have a background in computation or statistics, enjoy, learn with my mistakes, and go on to this world of data science.</p>
+<p>If you have any questions, want to know more about any of these topics, or even if you have a suggestion, feel free to contact me; I will be glad to hear from you.</p>
+<p>All the best,</p>
+<p>Flávia E. Rius</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Article originally published in Portuguese at <a href="https://www.linkedin.com/pulse/7-dicas-para-pesquisadores-acad%C3%AAmicos-rumo-%C3%A0-ci%C3%AAncia-fl%C3%A1via/">Linkedin</a>↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>data science</category>
+  <category>R</category>
+  <category>PhD</category>
+  <category>academia</category>
+  <guid>https://flaviaerius.com/posts/seven-tips-academia-to-data-science/</guid>
+  <pubDate>Wed, 10 Aug 2022 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Stuck in an error message? Let me help you fix it!</title>
+  <dc:creator>Flávia E. Rius</dc:creator>
+  <link>https://flaviaerius.com/posts/tips-fix-error/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is for R beginners, or even intermediate and advanced users who want a different perspective about how to debug errors in R.</p>
+<p><del>Always</del> Sometimes you face errors in R, it is unavoidable. I will give you three different tools to debug the errors on your own, and avoid getting stuck not knowing what to do.</p>
+<section id="look-for-typos-in-your-code." class="level3">
+<h3 class="anchored" data-anchor-id="look-for-typos-in-your-code.">1. Look for typos in your code.</h3>
+<p>As simple as that. Very often they are the origin of the error message. A parentheses missing, or in the wrong place, same as a comma, can change R interpretation and lead to different errors. Same if you add the wrong variable name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># For example, forgetting a {</span></span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span>(y <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>) {</span>
+<span id="cb1-4"> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span>(y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) {</span>
+<span id="cb1-5">   <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(y, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is bigger than 2."</span>))</span>
+<span id="cb1-6"> }</span>
+<span id="cb1-7">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> {</span>
+<span id="cb1-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(y, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"is not bigger than 2."</span>))</span>
+<span id="cb1-9">  <span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">#### It should be here ####</span></span>
+<span id="cb1-10">}</span></code></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error: &lt;text&gt;:12:0: unexpected end of input
+10: }
+11: 
+   ^</code></pre>
+</div>
+</div>
+</section>
+<section id="use-the-great-question-mark-tool-in-r-to-access-what-the-function-does." class="level3">
+<h3 class="anchored">2. Use the great question mark tool in R to access what the function does.</h3>
+<p>By typing ?[function], you will be able to see a help page, very often well described. Such as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">?mean</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<title>R: Arithmetic Mean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css">
+<div class="container">
+
+
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td>mean</td>
+<td style="text-align: right;">R Documentation</td>
+</tr>
+</tbody>
+</table>
+<section id="mean" class="level2">
+<h2 class="anchored" data-anchor-id="mean">Arithmetic Mean</h2>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
+<p>Generic function for the (trimmed) arithmetic mean.</p>
+</section>
+<section id="usage" class="level3">
+<h3 class="anchored" data-anchor-id="usage">Usage</h3>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x, ...)</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="do" style="color: #5E5E5E;
+background-color: null;
+font-style: italic;">## Default S3 method:</span></span>
+<span id="cb4-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(x, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trim =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, ...)</span></code></pre></div>
+</section>
+<section id="arguments" class="level3">
+<h3 class="anchored" data-anchor-id="arguments">Arguments</h3>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td><code id="mean_:_x">x</code></td>
+<td><p>An <span class="rlang"><strong>R</strong></span> object. Currently there are methods for numeric/logical vectors and date, date-time and time interval objects. Complex vectors are allowed for <code>trim = 0</code>, only.</p></td>
+</tr>
+<tr class="even">
+<td><code id="mean_:_trim">trim</code></td>
+<td><p>the fraction (0 to 0.5) of observations to be trimmed from each end of <code>x</code> before the mean is computed. Values of trim outside that range are taken as the nearest endpoint.</p></td>
+</tr>
+<tr class="odd">
+<td><code id="mean_:_na.rm">na.rm</code></td>
+<td><p>a logical evaluating to <code>TRUE</code> or <code>FALSE</code> indicating whether <code>NA</code> values should be stripped before the computation proceeds.</p></td>
+</tr>
+<tr class="even">
+<td><code id="mean_:_...">...</code></td>
+<td><p>further arguments passed to or from other methods.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h3 class="anchored">Value</h3>
+
+<p>If <code>trim</code> is zero (the default), the arithmetic mean of the
+values in <code>x</code> is computed, as a numeric or complex vector of
+length one.  If <code>x</code> is not logical (coerced to numeric), numeric
+(including integer) or complex, <code>NA_real_</code> is returned, with a warning.
+</p>
+<p>If <code>trim</code> is non-zero, a symmetrically trimmed mean is computed
+with a fraction of <code>trim</code> observations deleted from each end
+before the mean is computed.
+</p>
+
+
+<h3 class="anchored">References</h3>
+
+<p>Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
+<em>The New S Language</em>.
+Wadsworth &amp; Brooks/Cole.
+</p>
+
+
+<h3 class="anchored">See Also</h3>
+
+<p><code>weighted.mean</code>, <code>mean.POSIXct</code>,
+<code>colMeans</code> for row and column means.
+</p>
+
+
+<h3 class="anchored">Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(0:10, 50)
+xm &lt;- mean(x)
+c(xm, mean(x, trim = 0.10))
+</code></pre>
+
+
+</section></section></div>
+
+</div></div></section>
+
+ ]]></description>
+  <category>data science</category>
+  <category>R</category>
+  <category>error</category>
+  <guid>https://flaviaerius.com/posts/tips-fix-error/</guid>
+  <pubDate>Tue, 14 Jun 2022 03:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
