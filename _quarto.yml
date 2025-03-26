@@ -27,8 +27,3 @@ format:
     embed-resources: true
     self-contained: true
     highlight-style: github
-
-comments:
-  giscus:
-    theme: dark_dimmed
-    repo: flaviaerius/blog_quarto
