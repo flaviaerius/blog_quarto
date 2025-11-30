@@ -24,6 +24,7 @@ website:
       - text: Home
         href: index.qmd
       - about.qmd
+      - services.qmd
 format:
   html:
     smooth-scroll: true

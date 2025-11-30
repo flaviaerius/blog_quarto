@@ -173,5 +173,40 @@
     "title": "How To Operate Large Files in Bioinformatics",
     "section": "Server/cluster in your university",
     "text": "Server/cluster in your university\n\n\n\nPhoto by Taylor Vick on Unsplash\n\n\nIn this option there are two different ways that a server might be provided to you: via a job schedule strategy or by giving you access to a slice of this server.\n\nJob schedule strategy\nA server, as the instance in the cloud computing resource, is a remote computer to which you have access. The job schedule strategy requires you to learn how to structure your data and then you need to write your scripts and submit them to the job scheduler, then wait for your turn to run them, as other people send their jobs to the scheduler too. The most popular examples are Slurm and SGE.\nGenerally there is a free limited space (scratch) of the server for you to experiment with a slice of the data (so you are certain that your script is correct to send to schedule for example). Some more complex labs allow you to send to a specific server schedule line, depending on your demand of CPU (or GPU) and memory. These are aspects you may require by task as well when submitting your job to the scheduler.\n\n\nUsing a slice of the server\nAnother way of doing this, generally in less experienced labs, is by requesting a specific slice of the server available in the university for you to use during your full project. That would be: “I need 100GB disk with 16GB of memory and 4 CPU to run my analysis”. In my PhD I knew that I could have asked for it in my university, but I did not have a bit of idea on what would be my CPU, RAM memory and storage needs. Therefore I could not get it. I still relied on my collaborator’s server to finish my analyses. So this is an important knowledge to have.\nCalculating the necessary computational resources for your bioinformatics analyses will need to be addressed in a new blog post.\nI hope this post has helped you on your bioinformatics journey!"
+  },
+  {
+    "objectID": "services.html",
+    "href": "services.html",
+    "title": "Services",
+    "section": "",
+    "text": "Tell me your bioinformatics or R problem and I will solve it for you.\nAsk me to explain a bioinformatics concept you are not understanding.\nFill the form with your request. You’ll hear back from me within 1 business day.\nPlatform: Zoom.\nIncluded: AI summary and session recording.\nInvestment: $120 per hour."
+  },
+  {
+    "objectID": "services.html#mentoring-session",
+    "href": "services.html#mentoring-session",
+    "title": "Services",
+    "section": "",
+    "text": "Tell me your bioinformatics or R problem and I will solve it for you.\nAsk me to explain a bioinformatics concept you are not understanding.\nFill the form with your request. You’ll hear back from me within 1 business day.\nPlatform: Zoom.\nIncluded: AI summary and session recording.\nInvestment: $120 per hour."
+  },
+  {
+    "objectID": "services.html#freelance-job",
+    "href": "services.html#freelance-job",
+    "title": "Services",
+    "section": "Freelance job",
+    "text": "Freelance job\nHire me to apply a statistical analysis to your biomedical research, or to run a bioinformatics pipeline when you don’t have the resources for it.\nFill the form with your request. You’ll hear back from me within 1 business day.\nAll data shared is handled confidentially and securely, with NDA signed by both parts.\nPlatform: Meetings to define questions and deliverables conducted on Zoom, and communication during the project established through email.\nIncluded: Questions answered about the analyses up to one year after the delivery of results. Deliverables can be: scripts, quarto documents, PDFs, depending on what is requested in the beginning.\nInvestment: Dependent of the project scope and time."
+  },
+  {
+    "objectID": "services.html#examples-of-previous-jobsmentoring-sessions",
+    "href": "services.html#examples-of-previous-jobsmentoring-sessions",
+    "title": "Services",
+    "section": "Examples of previous jobs/mentoring sessions",
+    "text": "Examples of previous jobs/mentoring sessions\n\nDifferential expression\nPipeline QC\nPRS computation\nMachine learning modeling\nVisualization & reporting"
+  },
+  {
+    "objectID": "services.html#areas-of-expertise",
+    "href": "services.html#areas-of-expertise",
+    "title": "Services",
+    "section": "Areas of expertise",
+    "text": "Areas of expertise\nR and bash are my main languages, and I work with data analysis, statistics, and bioinformatics.\nUnder the bioinformatics umbrella, my areas of expertise are:\n\nTranscriptomics (RNA-seq and Affymetrix microarray);\nPopulation genomics (GWAS, PRS)\nDNA methylation sequencing (ERRBS and Infinium methylation).\n\nYou can check relevant reviews of my work here"
   }
 ]
