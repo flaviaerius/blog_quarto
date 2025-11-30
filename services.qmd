@@ -1,0 +1,56 @@
+---
+title: "Services"
+format: html
+image: images/foto_perfil.jpeg
+about:
+  template: trestles
+  links:
+    - text: Reviews
+      href: https://www.codementor.io/@flaviaerius
+---
+
+## Mentoring session
+
+Tell me your bioinformatics or R problem and I will solve it for you. 
+
+Ask me to explain a bioinformatics concept you are not understanding. 
+
+[Fill the form with your request](https://docs.google.com/forms/d/e/1FAIpQLSesAWNFS7xK2dYiY4rA4w6RzIrjmWY_4fwbG_pHaMEF62Gxyg/viewform?usp=header).
+You'll hear back from me within 1 business day.
+
+**Platform**: Zoom. 
+
+**Included**: AI summary and session recording. 
+
+**Investment**: $120 per hour. 
+
+
+## Freelance job
+
+Hire me to apply a statistical analysis to your biomedical research, or to run a bioinformatics pipeline when you don't have the resources for it.
+
+[Fill the form with your request](https://docs.google.com/forms/d/e/1FAIpQLSdBocQqQe6H_Au9Ut99p_wugJBZdPqAChqmu0fHy1mm56rwXw/viewform?usp=header).
+You'll hear back from me within 1 business day.
+
+All data shared is handled confidentially and securely, with NDA signed by both parts.
+
+**Platform**: Meetings to define questions and deliverables conducted on Zoom, and communication during the project established through email. 
+
+**Included**: Questions answered about the analyses up to one year after the delivery of results. Deliverables can be: scripts, quarto documents, PDFs, depending on what is requested in the beginning.
+
+**Investment**: Dependent of the project scope and time.
+
+
+## Areas of expertise
+
+**R** and **bash** are my main languages, and I work with data analysis, statistics, and bioinformatics.
+
+Under the bioinformatics umbrella, my areas of expertise are:
+
+* **Transcriptomics** (RNA-seq and Affymetrix microarray);
+
+* **Population genomics** (GWAS, PRS)
+    
+* **DNA methylation sequencing** (ERRBS and Infinium methylation).
+
+You can check relevant reviews of my work [here](https://www.codementor.io/@flaviaerius)
