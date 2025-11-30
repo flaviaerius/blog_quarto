@@ -1,5 +1,6 @@
 ---
 title: "Understand Linear Regression Results in R"
+image: /posts/linear-regression-coefs/images/lm-plot-1.png
 author: "Flávia E. Rius"
 date: "2023-07-20"
 categories: [data science, R, statistics, machine learning, supervised learning, regression]
@@ -63,13 +64,13 @@ fit <- lm(mpg ~ wt, mtcars)
 ```
 
 &nbsp;
- 
+
 To obtain all statistics and some of the metrics for our model, we need to use the function `summary()` in R.
 
 &nbsp;
 
 ```{r}
-summary(fit) 
+summary(fit)
 ```
 
 &nbsp;
@@ -85,12 +86,15 @@ While __metrics__ are the values to measure performance of the overall model, __
 To visualize some parts of the explanation, the linear regression plot will be illustrated below.
 
 ```{r, echo = F}
+#| label: lm-plot
+#| fig-ext: png
+#| fig-path: images/
 #| fig-width: 5
 #| fig-height: 5
-mtcars %>% 
+mtcars %>%
   ggplot(aes(wt, mpg)) +
   geom_point() +
-  geom_smooth(method='lm', formula = y ~ x) +
+  geom_smooth(method = 'lm', formula = y ~ x) +
   ggtitle("Linear Regression Plot")
 ```
 
@@ -100,8 +104,8 @@ mtcars %>%
 
 ```{r}
 # Residuals:
-#     Min      1Q  Median      3Q     Max 
-# -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+#     Min      1Q  Median      3Q     Max
+# -4.5432 -2.3647 -0.1252  1.4096  6.8727
 ```
 
 &nbsp;
@@ -131,7 +135,7 @@ Overall, the coefficients contain information about the predictors of your depen
 
 ```{r}
 # Coefficients:
-#             Estimate Std. Error t value Pr(>|t|)    
+#             Estimate Std. Error t value Pr(>|t|)
 # (Intercept)  37.2851     1.8776  19.858  < 2e-16 ***
 # wt           -5.3445     0.5591  -9.559 1.29e-10 ***
 ```
@@ -203,7 +207,7 @@ y <- mtcars$mpg
 y_hat <- predict(fit)
 df <- 30 # degrees of freedom
 
-sqrt(sum((y - y_hat)^2)/df)
+sqrt(sum((y - y_hat)^2) / df)
 ```
 
 &nbsp;
@@ -304,7 +308,10 @@ miles_to_kilometers <- 1.61
 gallons_to_liters <- 3.79
 lb_to_kg <- 0.45
 
-fit_not_english <- lm(I(mpg*miles_to_kilometers/gallons_to_liters) ~ I(wt*lb_to_kg), mtcars)
+fit_not_english <- lm(
+  I(mpg * miles_to_kilometers / gallons_to_liters) ~ I(wt * lb_to_kg),
+  mtcars
+)
 
 summary(fit_not_english)
 ```
