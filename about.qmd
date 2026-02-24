@@ -1,12 +1,15 @@
 ---
 title: "About"
-image: foto_2023.jpeg
+image: images/foto_2023.jpeg
 about:
   template: jolla
   links:
     - icon: twitter
       text: Twitter
       href: https://twitter.com/flaviaerius
+    - icon: bluesky
+      text: Bluesky
+      href: https://bsky.app/profile/flaviaerius.bsky.social
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/fl%C3%A1via-eichemberger-rius-b5119770/
