@@ -1,0 +1,75 @@
+---
+title: 'How to set up your quarto + uv project in Positron'
+image: ''
+author: 'Flávia E. Rius'
+date: '2026-02-24'
+categories: [python, quarto]
+website:
+    google-analytics: 'G-S78JRQSZER'
+---
+
+If you are experiencing problems with integrating your quarto + python doc with the uv manager, let me tell you how you should do it.
+
+My biggest problem was with seaborn plots, that were not appearing in my html or pdf rendered documents. So, after a bit of researching, LLM asking, and experience, here is the step by step for your quarto docs to access your uv python and packages:
+
+1. Create the folder you want your project to live in.
+
+```bash
+mkdir uv-render-seaborn
+```
+
+2. Start uv
+
+```bash
+uv init
+```
+
+3. Add the packages you want to use
+
+```bash
+uv add pandas numpy seaborn matplotlib jupyter ipykernel
+```
+
+jupyter and ipykernel are two packages that you **need** to install to make it work.
+
+4. Create the environment ipykernel using `uv run`, so it runs with the uv python configuration, and give it a name.
+
+```bash
+uv run python -m ipykernel install --user --name uv-render-seaborn
+```
+
+With `uv run` you specify that this should run in the uv environment.
+
+- python -m ipykernel install: using the module (-m) of python ipykernel, install
+- --user: specify that it is for the user, and not global
+- --name uv-render-seaborn: give it a name, that will be used inside all of the quarto documents
+
+Here, the thing you can and **should** use your own are what comes after --name (mine is uv-render-seaborn). This name is important, as you'll need to add it to all of your quarto documents.
+
+5. Close Positron and open again.
+
+Note that, when ou open it again, it will consume a lot of memory and CPU -- I recommend that you close a few tabs before doing this, especially if you have 16GB mem, like me, or less.
+
+6. Create a _quarto.yaml doc with the following content:
+
+```yaml
+---
+jupyter: uv-render-seaborn # add the name of the kernel you created in step 4, this is essential to work
+---
+
+```
+
+7. Create code blocks with import of the packages, and add a specific line to show plots in all code blocks:
+
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline # this is what you should add to make all of the plots that contain matplotlib code appear
+```
+
+
+
+Obs.: if you are using matplotlib, you should add to the imports code block the command %matplotlib inline, in order to make your plots appear in the output.
+
+Obs2.: in Positron, you need to close and reopen the viewer + ctrl+c’ing the termnal everytime you’ll preview a file again, otherwise an error will come out.

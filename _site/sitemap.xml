@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://flaviaerius.com/index.html</loc>
-    <lastmod>2025-11-30T18:45:30.609Z</lastmod>
+    <lastmod>2026-02-24T23:50:12.815Z</lastmod>
   </url>
   <url>
     <loc>https://flaviaerius.com/posts/big-data-bioinformatics/index.html</loc>
@@ -22,6 +22,14 @@
   </url>
   <url>
     <loc>https://flaviaerius.com/services.html</loc>
-    <lastmod>2025-11-30T19:35:29.093Z</lastmod>
+    <lastmod>2026-02-21T19:19:47.914Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flaviaerius.com/about.html</loc>
+    <lastmod>2026-02-21T19:18:42.823Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flaviaerius.com/posts/quarto-with-python/index.html</loc>
+    <lastmod>2026-02-25T00:51:32.915Z</lastmod>
   </url>
 </urlset>
