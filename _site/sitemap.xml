@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://flaviaerius.com/index.html</loc>
-    <lastmod>2025-11-30T18:45:30.609Z</lastmod>
+    <loc>https://flaviaerius.com/about.html</loc>
+    <lastmod>2026-09-08T13:45:47.710Z</lastmod>
   </url>
   <url>
     <loc>https://flaviaerius.com/posts/big-data-bioinformatics/index.html</loc>
-    <lastmod>2025-03-26T09:53:04.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://flaviaerius.com/posts/linear-regression-coefs/index.html</loc>
-    <lastmod>2025-11-30T18:03:57.571Z</lastmod>
-  </url>
-  <url>
-    <loc>https://flaviaerius.com/posts/seven-tips-academia-to-data-science/index.html</loc>
-    <lastmod>2025-03-26T09:43:10.917Z</lastmod>
+    <lastmod>2026-09-06T09:22:14.061Z</lastmod>
   </url>
   <url>
     <loc>https://flaviaerius.com/posts/tips-fix-error/index.html</loc>
-    <lastmod>2025-03-26T09:43:10.917Z</lastmod>
+    <lastmod>2026-09-06T09:22:14.063Z</lastmod>
   </url>
   <url>
     <loc>https://flaviaerius.com/services.html</loc>
-    <lastmod>2025-11-30T19:35:29.093Z</lastmod>
+    <lastmod>2026-09-08T14:00:27.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flaviaerius.com/posts/linear-regression-coefs/index.html</loc>
+    <lastmod>2026-09-06T09:22:14.062Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flaviaerius.com/posts/seven-tips-academia-to-data-science/index.html</loc>
+    <lastmod>2026-09-06T09:22:14.062Z</lastmod>
+  </url>
+  <url>
+    <loc>https://flaviaerius.com/index.html</loc>
+    <lastmod>2026-09-06T13:53:51.689Z</lastmod>
   </url>
 </urlset>

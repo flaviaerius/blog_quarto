@@ -1,0 +1,145 @@
+/*-- scss:defaults --*/
+
+// =====================================================================
+//  Jardim Claro — tema escuro
+//  Camada de cor sobre o tema base `darkly`.
+//
+//  Não é o tema claro invertido. No escuro, as cores da cartela ficam
+//  CLARAS (elas viram o texto) e os tons escuros viram o fundo. É por
+//  isso que #1f5439, que aqui seria ilegível, dá lugar a #93c883.
+// =====================================================================
+
+// --- paleta ----------------------------------------------------------
+// Contrastes medidos sobre o fundo #131f19.
+
+$jc-noite:        #131f19; // fundo da página
+$jc-noite-2:      #0f1a14; // blocos de código (mais fundo que a página)
+$jc-noite-3:      #0d1712; // navbar
+$jc-giz:          #e4e4d8; // texto corrido            (15,3:1)
+$jc-giz-suave:    #8b9182; // datas, autoria, legendas  (5,4:1)
+$jc-folha-clara:  #93c883; // títulos                   (8,7:1)  — cartela
+$jc-broto:        #a8d68f; // links                    (10,2:1)  — cartela
+$jc-mata:         #2f5b3c; // banner de título
+$jc-mata-clara:   #d9edc3; // texto sobre o banner      (6,3:1 sobre a mata)
+$jc-tigerlily:    #f0785c; // hover                     (6,1:1)  — Tigerlily clareado
+$jc-tigerlily-d:  #c7452c; // fundo das pílulas de categoria
+$jc-brasa:        #2e241f; // fundo da faixa de anúncio
+$jc-brasa-clara:  #f0a98f; // texto sobre a brasa
+$jc-linha:        #22301f; // bordas e filetes
+
+// --- núcleo do Bootstrap ---------------------------------------------
+$primary:            $jc-broto !default;
+$secondary:          $jc-folha-clara !default;
+$body-bg:            $jc-noite !default;
+$body-color:         $jc-giz !default;
+$border-color:       $jc-linha !default;
+$link-color:         $jc-broto !default;
+$link-hover-color:   $jc-tigerlily !default;
+$headings-color:     $jc-folha-clara !default;
+
+// --- navbar ------------------------------------------------------------
+$navbar-bg:          $jc-noite-3 !default;
+$navbar-fg:          #c7dfae !default;
+$navbar-hl:          $jc-tigerlily !default; // aqui entra o laranja
+
+// --- banner de título ---------------------------------------------------
+$title-banner-bg:    $jc-mata !default;
+$title-banner-color: $jc-mata-clara !default;
+
+// --- código -------------------------------------------------------------
+$code-bg:            $jc-noite-2 !default;
+$code-color:         $jc-brasa-clara !default;
+$code-block-bg:      $jc-noite-2 !default;
+
+// --- sumário lateral -----------------------------------------------------
+$toc-color:          $jc-folha-clara !default;
+$toc-active-border:  $jc-tigerlily !default;
+$toc-inactive-border: $jc-linha !default;
+
+// --- rodapé --------------------------------------------------------------
+$footer-bg:           $jc-noite !default;
+$footer-fg:           $jc-giz-suave !default;
+$footer-border:       true !default;
+$footer-border-color: $jc-linha !default;
+
+
+/*-- scss:rules --*/
+
+.navbar {
+  border-bottom: 1px solid $jc-linha;
+}
+
+// --- categorias dos posts -------------------------------------------------
+// No escuro o Tigerlily escuro funciona como fundo: texto quase branco
+// sobre ele dá 4,9:1, e a pílula ainda salta contra o verde ao redor.
+.quarto-grid-item .listing-categories .listing-category,
+div.quarto-post .listing-categories .listing-category {
+  background-color: $jc-brasa;
+  border-color: $jc-brasa;
+  color: #fff1ecaa;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+// --- títulos dos posts na listagem ----------------------------------------
+// O título é um <a> dentro de um <h3>: o <h3> pega $headings-color, mas o
+// <a> dentro dele não. Precisa ser pintado à parte.
+div.quarto-post .listing-title a,
+.quarto-grid-item .listing-title a {
+  color: $jc-folha-clara;
+
+  &:hover {
+    color: $jc-tigerlily;
+  }
+}
+
+.quarto-listing-category {
+  .category {
+    color: $jc-giz-suave;
+  }
+  .category:hover {
+    color: $jc-tigerlily;
+  }
+  .category.active {
+    color: $jc-folha-clara;
+  }
+}
+
+// O Quarto emite a faixa como `.alert.alert-light` com id próprio. O id no
+// seletor é o que garante precedência sobre as variáveis de alerta do
+// Bootstrap (--bs-alert-bg), que a classe sozinha não venceria.
+#quarto-announcement.alert {
+  background-color: $jc-brasa;
+  border-color: #4a342c;
+  color: $jc-brasa-clara;
+
+  a {
+    color: $jc-brasa-clara;
+  }
+}
+
+blockquote {
+  border-left: 3px solid $jc-mata;
+  padding-left: 1em;
+  color: $jc-giz-suave;
+}
+
+.about-link {
+  color: $jc-broto;
+  border-color: $jc-linha;
+
+  &:hover {
+    color: $jc-tigerlily;
+    border-color: $jc-tigerlily;
+  }
+}
+
+hr {
+  border-top-color: $jc-linha;
+  opacity: 1;
+}
+
+::selection {
+  background-color: $jc-mata;
+  color: $jc-mata-clara;
+}

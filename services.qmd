@@ -1,11 +1,11 @@
 ---
 title: "Services"
 format: html
-image: images/foto_perfil.jpeg
+image: images/foto_positconf.jpg
 about:
   template: trestles
   links:
-    - text: Reviews
+    - text: Check my reviews here
       href: https://www.codementor.io/@flaviaerius
 ---
 

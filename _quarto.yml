@@ -29,10 +29,10 @@ format:
   html:
     smooth-scroll: true
     lazy-load-images: true
-    theme: 
-      light: flatly
-      dark: darkly
+    theme:
+      light: [flatly, theme-light.scss]
+      dark: [darkly, theme-dark.scss]
     toc: true
-    embed-resources: true
+    embed-resources: false
     self-contained: true
     highlight-style: github

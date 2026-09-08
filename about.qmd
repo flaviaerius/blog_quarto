@@ -1,12 +1,12 @@
 ---
 title: "About"
-image: foto_2023.jpeg
+image: images/foto_resort.png
 about:
-  template: jolla
+  template: trestles
   links:
     - icon: twitter
       text: Twitter
-      href: https://twitter.com/flaviaerius
+      href: https://x.com/flaviaerius
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/fl%C3%A1via-eichemberger-rius-b5119770/
@@ -21,7 +21,7 @@ about:
 
 Hi!
 
-I am Flávia!
+I'm Flávia!
 
 I am a data scientist with a background on biomedical sciences. 
 I have switched from wet lab to dry lab during my PhD, in which I studied cancer epigenomics, using a lot of bioinformatics both in R and bash.
@@ -31,7 +31,7 @@ Mostly I work with research and analysis of DNA sequencing data.
 
 I also mentor people in R programming, statistics and bioinformatics. 
 
-I have 118 5-star reviews in [codementor](https://www.codementor.io/@flaviaerius). 
+I have 123 5-star reviews in [codementor](https://www.codementor.io/@flaviaerius). 
 I really love to have this contact with people all over the world, and help them with their struggle coding or understanding a concept, especially because I've been there before and I know how hard that is.
 
 I love learning new things! 

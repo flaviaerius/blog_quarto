@@ -1,0 +1,160 @@
+/*-- scss:defaults --*/
+
+// =====================================================================
+//  Jardim Claro — tema claro
+//  Camada de cor sobre o tema base `flatly`.
+//
+//  Origem das cores: cartela de coloração pessoal (primavera clara)
+//  + PANTONE 17-1456 Tigerlily. Os neutros (marfim, grafite) não vêm
+//  da cartela — foram acrescentados porque uma cartela de coloração
+//  não fornece cor de fundo nem de texto corrido.
+//
+//  Regra que organiza tudo: o VERDE conduz, o LARANJA pontua.
+//  O laranja só aparece nas categorias, no hover e no anúncio.
+// =====================================================================
+
+// --- paleta ----------------------------------------------------------
+// Os números entre parênteses são a razão de contraste sobre o marfim.
+// O mínimo da WCAG AA para texto pequeno é 4,5:1.
+
+$jc-marfim:       #faf8f1; // fundo da página
+$jc-marfim-2:     #f1f3e6; // blocos de código e superfícies
+$jc-tinta:        #22312a; // texto corrido            (12,8:1)
+$jc-tinta-suave:  #6e7268; // datas, autoria, legendas  (4,7:1)
+$jc-floresta:     #1f5439; // títulos e navbar          (8,3:1)  — cartela
+$jc-folha:        #2f7a2a; // links                     (5,0:1)  — cartela escurecida
+$jc-broto:        #b7d68c; // banner de título                   — cartela
+$jc-tigerlily:    #e2583e; // Tigerlily puro: só áreas grandes   — PANTONE 17-1456
+$jc-tigerlily-d:  #c7452c; // Tigerlily escurecido      (4,9:1)  — pílulas e hover
+$jc-damasco:      #fbe0d6; // fundo da faixa de anúncio
+$jc-damasco-d:    #a83a25; // texto sobre o damasco     (7,0:1)
+$jc-linha:        #e4e5d6; // bordas e filetes
+
+// --- núcleo do Bootstrap ---------------------------------------------
+$primary:            $jc-folha !default;
+$secondary:          $jc-floresta !default;
+$body-bg:            $jc-marfim !default;
+$body-color:         $jc-tinta !default;
+$border-color:       $jc-linha !default;
+$link-color:         $jc-folha !default;
+$link-hover-color:   $jc-tigerlily-d !default;
+$headings-color:     $jc-floresta !default;
+
+// --- navbar (clara, não sólida) --------------------------------------
+// Mesma cor do corpo: a barra não vira um bloco, só um filete no topo.
+$navbar-bg:          $jc-marfim !default;
+$navbar-fg:          $jc-floresta !default;
+$navbar-hl:          $jc-tigerlily-d !default; // aqui entra o laranja
+
+// --- banner de título -------------------------------------------------
+// Sem estas duas, o Quarto usaria a cor da navbar e o banner sumiria.
+$title-banner-bg:    $jc-broto !default;
+$title-banner-color: #1b4632 !default;
+
+// --- código ------------------------------------------------------------
+$code-bg:            $jc-marfim-2 !default; // código inline
+$code-color:         $jc-damasco-d !default;
+$code-block-bg:      $jc-marfim-2 !default; // blocos ```{r}
+
+// --- sumário lateral ---------------------------------------------------
+$toc-color:          $jc-floresta !default;
+$toc-active-border:  $jc-tigerlily-d !default;
+$toc-inactive-border: $jc-linha !default;
+
+// --- rodapé ------------------------------------------------------------
+$footer-bg:           $jc-marfim !default;
+$footer-fg:           $jc-tinta-suave !default;
+$footer-border:       true !default;
+$footer-border-color: $jc-linha !default;
+
+
+/*-- scss:rules --*/
+
+// =====================================================================
+//  Ajustes que não cabem em variável: componentes próprios do Quarto
+//  que trazem cor fixa nas próprias regras.
+// =====================================================================
+
+// --- navbar ------------------------------------------------------------
+// Como a navbar tem a cor do corpo, ela precisa de um filete para existir.
+.navbar {
+  border-bottom: 1px solid $jc-linha;
+}
+
+// --- categorias dos posts ----------------------------------------------
+.quarto-grid-item .listing-categories .listing-category,
+div.quarto-post .listing-categories .listing-category {
+  background-color: $jc-marfim-2;
+  border-color: $jc-marfim-2;
+  color: #393939;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+// --- títulos dos posts na listagem -------------------------------------
+// O título é um <a> dentro de um <h3>: o <h3> pega $headings-color, mas o
+// <a> dentro dele não. Precisa ser pintado à parte.
+div.quarto-post .listing-title a,
+.quarto-grid-item .listing-title a {
+  color: $jc-floresta;
+
+  &:hover {
+    color: $jc-tigerlily-d;
+  }
+}
+
+// --- filtro de categorias na lateral -----------------------------------
+.quarto-listing-category {
+  .category {
+    color: $jc-tinta-suave;
+  }
+  .category:hover {
+    color: $jc-tigerlily-d;
+  }
+  .category.active {
+    color: $jc-floresta;
+  }
+}
+
+// --- faixa de anúncio ---------------------------------------------------
+// O Quarto emite a faixa como `.alert.alert-light` com id próprio. O id no
+// seletor é o que garante precedência sobre as variáveis de alerta do
+// Bootstrap (--bs-alert-bg), que a classe sozinha não venceria.
+#quarto-announcement.alert {
+  background-color: $jc-damasco;
+  border-color: #f3c7b5;
+  color: $jc-damasco-d;
+
+  a {
+    color: $jc-damasco-d;
+  }
+}
+
+// --- citações -----------------------------------------------------------
+blockquote {
+  border-left: 3px solid $jc-broto;
+  padding-left: 1em;
+  color: $jc-tinta-suave;
+}
+
+// --- links da página About/Services (template trestles) -----------------
+.about-link {
+  color: $jc-folha;
+  border-color: $jc-linha;
+
+  &:hover {
+    color: $jc-tigerlily-d;
+    border-color: $jc-tigerlily-d;
+  }
+}
+
+// --- detalhes -----------------------------------------------------------
+hr {
+  border-top-color: $jc-linha;
+  opacity: 1;
+}
+
+::selection {
+  background-color: $jc-broto;
+  color: #1b4632;
+}
