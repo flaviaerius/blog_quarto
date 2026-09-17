@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: images/foto_resort.png
+image: images/foto_positconf.jpg
 about:
   template: trestles
   links:
