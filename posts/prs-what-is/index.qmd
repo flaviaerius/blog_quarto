@@ -1,0 +1,17 @@
+---
+title: "What is a PRS and why you should care"
+author: "Flávia E. Rius"
+date: "2022-08-10"
+---
+
+```{r}
+#| include: false
+library(ggplot2)
+library(dplyr)
+```
+
+# What is a PRS and why you should care
+
+PRS stands for Polygenic Risk Score. This name is often given to both the final score computed by the sum of significant variant weights and to the variant weights per se for a specific disease. The theory behind this score is the genetic heritability of common diseases, i.e. diseases that happen with a high prevalence, and complex diseases, i.e. diseases that are caused by a sum of factors: genetics, environment, and their interaction. To give you a base comparison, there is a spectrum between genetic and environmental causes. 
+
+

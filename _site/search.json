@@ -179,6 +179,13 @@
     "href": "index.html",
     "title": "Flávia E. Rius",
     "section": "",
-    "text": "How To Operate Large Files in Bioinformatics\n\n\n\nbioinformatics\n\ncloud computing\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstand Linear Regression Results in R\n\n\n\ndata science\n\nR\n\nstatistics\n\nmachine learning\n\nsupervised learning\n\nregression\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\n7 tips for Academic Researchers on Their Way To Data Science\n\n\n\ndata science\n\nR\n\nPhD\n\nacademia\n\n\n\n\n\n\n\n\n\nAug 10, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nStuck in an Error Message? Let Me Help You Fix It!\n\n\n\ndata science\n\nR\n\nerror\n\n\n\n\n\n\n\n\n\nJun 14, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\nNo matching items"
+    "text": "How To Operate Large Files in Bioinformatics\n\n\n\nbioinformatics\n\ncloud computing\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstand Linear Regression Results in R\n\n\n\ndata science\n\nR\n\nstatistics\n\nmachine learning\n\nsupervised learning\n\nregression\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is a PRS and why you should care\n\n\n\n\n\n\n\n\nAug 10, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\n7 tips for Academic Researchers on Their Way To Data Science\n\n\n\ndata science\n\nR\n\nPhD\n\nacademia\n\n\n\n\n\n\n\n\n\nAug 10, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nStuck in an Error Message? Let Me Help You Fix It!\n\n\n\ndata science\n\nR\n\nerror\n\n\n\n\n\n\n\n\n\nJun 14, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/prs-what-is/index.html",
+    "href": "posts/prs-what-is/index.html",
+    "title": "What is a PRS and why you should care",
+    "section": "",
+    "text": "What is a PRS and why you should care\nPRS stands for Polygenic Risk Score. This name is often given to both the final score computed by the sum of significant variant weights and to the variant weights per se for a specific disease. The theory behind this score is the genetic heritability of common diseases, i.e. diseases that happen with a high prevalence, and complex diseases, i.e. diseases that are caused by a sum of factors: genetics, environment, and their interaction. To give you a base comparison, there is a spectrum between genetic and environmental causes."
   }
 ]
