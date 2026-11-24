@@ -1,0 +1,8 @@
+---
+title: "Prepare Files to Calculate a Polygenic Risk Score"
+format: html
+---
+
+This post will contain a simple data extraction and pre-processing to conduct a PRS calculation using plink2. 
+
+The PRS file will be obtained from the [PGS Catalog](pgscatalog.org) and the individual file from the [1000 Genomes Project]()
