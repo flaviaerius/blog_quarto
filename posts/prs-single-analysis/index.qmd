@@ -5,4 +5,27 @@ format: html
 
 This post will contain a simple data extraction and pre-processing to conduct a PRS calculation using plink2. 
 
-The PRS file will be obtained from the [PGS Catalog](pgscatalog.org) and the individual file from the [1000 Genomes Project]()
+# Introduction
+
+A Polygenic Score is a numeric score that, when put into a population perspective, is able to estimate a certain characteristic, such as height, eye color, and chronotype, or the risk of a complex disease, such as diabetes and cancer.
+
+# Analysis
+
+The PRS file will be obtained from the [PGS Catalog](pgscatalog.org) and the individual file from the [1000 Genomes Project](https://www.internationalgenome.org/).
+
+# Downloading the files
+
+For this analysis, we'll create a file structure to organize our data.
+
+```{bash}
+tree ~/Tools/prs_computation
+```
+
+## PGS Catalog
+
+For this exercise, we'll work with a PRS set of variants and weights (we'll call it PRS file) for knee osteoarthtitis, a condition of severe pain in knee joints that occur with ageing and is caused by wear of the cartillage.
+
+The chosen PGS file is [PGS002729](https://www.pgscatalog.org/score/PGS002729/), from the paper of [Sedaghati-Khayat B et al., Arthritis Rheumatol (2022)](https://doi.org/10.1002/art.42246). The PGS has 24 variants and was validated in three different study popunations, all of European ancestry.
+
+## 1000 Genomes
+
