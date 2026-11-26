@@ -24,6 +24,7 @@ website:
       - text: Home
         href: index.qmd
       - about.qmd
+
 format:
   html:
     smooth-scroll: true
@@ -35,3 +36,5 @@ format:
     embed-resources: false
     self-contained: true
     highlight-style: github
+
+engine: knitr

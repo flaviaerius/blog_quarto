@@ -179,6 +179,48 @@
     "href": "index.html",
     "title": "Flávia E. Rius",
     "section": "",
-    "text": "How To Operate Large Files in Bioinformatics\n\n\n\nbioinformatics\n\ncloud computing\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstand Linear Regression Results in R\n\n\n\ndata science\n\nR\n\nstatistics\n\nmachine learning\n\nsupervised learning\n\nregression\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\n7 tips for Academic Researchers on Their Way To Data Science\n\n\n\ndata science\n\nR\n\nPhD\n\nacademia\n\n\n\n\n\n\n\n\n\nAug 10, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nStuck in an Error Message? Let Me Help You Fix It!\n\n\n\ndata science\n\nR\n\nerror\n\n\n\n\n\n\n\n\n\nJun 14, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\nNo matching items"
+    "text": "Prepare Files to Calculate a Polygenic Risk Score\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow To Operate Large Files in Bioinformatics\n\n\n\nbioinformatics\n\ncloud computing\n\n\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstand Linear Regression Results in R\n\n\n\ndata science\n\nR\n\nstatistics\n\nmachine learning\n\nsupervised learning\n\nregression\n\n\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\n7 tips for Academic Researchers on Their Way To Data Science\n\n\n\ndata science\n\nR\n\nPhD\n\nacademia\n\n\n\n\n\n\n\n\n\n\n\nAug 10, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\n\n\n\n\n\n\n\nStuck in an Error Message? Let Me Help You Fix It!\n\n\n\ndata science\n\nR\n\nerror\n\n\n\n\n\n\n\n\n\n\n\nJun 14, 2022\n\n\nFlávia E. Rius\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/prs-single-analysis/index.html",
+    "href": "posts/prs-single-analysis/index.html",
+    "title": "Prepare Files to Calculate a Polygenic Risk Score",
+    "section": "",
+    "text": "Polygenic Scores (PGS) are numeric values given by a sum of weights of genetic variants associated with a particular polygenic trait – such as height, eye color, and chronotype – or a complex and common disease – such as diabetes, cardiovascular disease, and schizophrenia. PGS is the name given to any score, and we can call it Polygenic Risk Score (PRS) when it is associated to the risk of a disease. PGS/PRS can be either the numeric score or the file containing the set of variants and their weights to a particular trait or disease. I still have the intention of doing a specific post explaining better about Polygenic Scores, how they are developed, the challenges, and so on. For now, if you want to know more, you can take a look at the NHGRI resource explaining it in a very didatic way.\nIn this post, PGS and PRS will be used when referring to the score, and PGS/PRS file when referring to the set of variants and weights.\nAlthough calculating a polygenic risk score (PRS) is not the most complicated part of evaluating a PRS file, it is a mandatory step to every single researcher and bioinformatician willing to work with this tool of statistical genetics. Because of that, this is the post I choose to introduct a tutorial about PRS in my blog. I hope it is clear and fun!\nThe scope of the post will be: downloading public data (PRS + individual variants), preparing the files, and calculating the score.\nSo let’s start!"
+  },
+  {
+    "objectID": "posts/prs-single-analysis/index.html#pgs-catalog",
+    "href": "posts/prs-single-analysis/index.html#pgs-catalog",
+    "title": "Prepare Files to Calculate a Polygenic Risk Score",
+    "section": "3.1 PGS Catalog",
+    "text": "3.1 PGS Catalog\nFor this exercise, we’ll work with a PRS set of variants and weights (we’ll call it PRS file) for knee osteoarthtitis, a condition of severe pain in knee joints that occur with ageing and is caused by wear of the cartillage.\nThe chosen PGS file is PGS002729, from the paper of Sedaghati-Khayat B et al., Arthritis Rheumatol (2022). The PGS has 24 variants and was validated in three different study popunations, all of European ancestry.\nWe’ll download the harmonized version of the score to GRCh38, because this is the genome build version of the individual genome file we’ll work with.\n\nwget -P $PRS_COMPUTATION https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS002729/ScoringFiles/Harmonized/PGS002729_hmPOS_GRCh38.txt.gz"
+  },
+  {
+    "objectID": "posts/prs-single-analysis/index.html#genomes",
+    "href": "posts/prs-single-analysis/index.html#genomes",
+    "title": "Prepare Files to Calculate a Polygenic Risk Score",
+    "section": "3.2 1000 Genomes",
+    "text": "3.2 1000 Genomes\nTo calculate this score, we’ll need the genotyping file from an individual. The 1000 Genomes Project (1KGP) contains more than 2,500 Whole Genome Sequencing files from all over the world, and each individual is identified by their ancestry. For this project, I’ve selected a British in England and Scotland sample, identified as HG0096.\nThe main data for the 1KGP is in the IGSR: The International Genome Sample Resource website."
+  },
+  {
+    "objectID": "posts/prs-single-analysis/index.html#requirements-sec",
+    "href": "posts/prs-single-analysis/index.html#requirements-sec",
+    "title": "Prepare Files to Calculate a Polygenic Risk Score",
+    "section": "Requirements",
+    "text": "Requirements"
+  },
+  {
+    "objectID": "posts/prs-single-analysis/index.html#sec-requirements",
+    "href": "posts/prs-single-analysis/index.html#sec-requirements",
+    "title": "Prepare Files to Calculate a Polygenic Risk Score",
+    "section": "3.3 Requirements",
+    "text": "3.3 Requirements"
+  },
+  {
+    "objectID": "posts/prs-single-analysis/index.html#giab-sample",
+    "href": "posts/prs-single-analysis/index.html#giab-sample",
+    "title": "Prepare Files to Calculate a Polygenic Risk Score",
+    "section": "3.2 GIAB sample",
+    "text": "3.2 GIAB sample\nTo calculate this score, we’ll need the genotyping file from an individual.\nWe’ll use the Genome In a Bottle HG001 (NA12878) sample.\n\ndownload of latest version (v4.2.1)\nGRCh38\nVCF file\nSNV, small indel and homozygous reference calls\nVCF file used as a benchmark to SNV calls\n\n\n# VCF\nwget -P $PRS_COMPUTATION https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/NA12878_HG001/latest/GRCh38/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz\n\n# Index\nwget -P $PRS_COMPUTATION https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/NA12878_HG001/latest/GRCh38/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi"
   }
 ]

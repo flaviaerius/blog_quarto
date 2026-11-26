@@ -1,25 +1,41 @@
 ---
 title: "Prepare Files to Calculate a Polygenic Risk Score"
 format: html
+number-sections: true
+engine: knitr
 ---
-
-This post will contain a simple data extraction and pre-processing to conduct a PRS calculation using plink2. 
 
 # Introduction
 
-A Polygenic Score is a numeric score that, when put into a population perspective, is able to estimate a certain characteristic, such as height, eye color, and chronotype, or the risk of a complex disease, such as diabetes and cancer.
+Polygenic Scores (PGS) are numeric values given by a sum of weights of genetic variants associated with a particular polygenic trait -- such as height, eye color, and chronotype -- or a complex and common disease -- such as diabetes, cardiovascular disease, and schizophrenia. PGS is the name given to any score, and we can call it Polygenic Risk Score (PRS) when it is associated to the risk of a disease. PGS/PRS can be either the numeric score or the file containing the set of variants and their weights to a particular trait or disease. I still have the intention of doing a specific post explaining better about Polygenic Scores, how they are developed, the challenges, and so on. For now, if you want to know more, you can take a look at the [NHGRI resource](https://www.genome.gov/Health/Genomics-and-Medicine/Polygenic-risk-scores) explaining it in a very didatic way.
+
+In this post, PGS and PRS will be used when referring to the score, and PGS/PRS file when referring to the set of variants and weights.
+
+Although calculating a polygenic risk score (PRS) is not the most complicated part of evaluating a PRS file, it is a mandatory step to every single researcher and bioinformatician willing to work with this tool of statistical genetics. Because of that, this is the post I choose to introduct a tutorial about PRS in my blog. I hope it is clear and fun!
+
+The scope of the post will be: downloading public data (PRS + individual variants), preparing the files, and calculating the score.
+
+So let's start!
 
 # Analysis
 
-The PRS file will be obtained from the [PGS Catalog](pgscatalog.org) and the individual file from the [1000 Genomes Project](https://www.internationalgenome.org/).
+The PRS file will be obtained from the [PGS Catalog](pgscatalog.org) and the individual file from the [Genome In a Bottle Project](https://www.nist.gov/programs-projects/genome-bottle).
+
+To assess all programs required for this analysis, please see @sec-requirements for reference.
 
 # Downloading the files
 
 For this analysis, we'll create a file structure to organize our data.
+Let's define the path where the files and scripts will be stored as an environment variable.
+
+```{r}
+Sys.setenv(PRS_COMPUTATION = "/Users/flavia/Tools/prs_computation/data")
+```
 
 ```{bash}
-tree ~/Tools/prs_computation
+tree $PRS_COMPUTATION
 ```
+
 
 ## PGS Catalog
 
@@ -27,5 +43,52 @@ For this exercise, we'll work with a PRS set of variants and weights (we'll call
 
 The chosen PGS file is [PGS002729](https://www.pgscatalog.org/score/PGS002729/), from the paper of [Sedaghati-Khayat B et al., Arthritis Rheumatol (2022)](https://doi.org/10.1002/art.42246). The PGS has 24 variants and was validated in three different study popunations, all of European ancestry.
 
-## 1000 Genomes
+We'll download the harmonized version of the score to GRCh38, because this is the genome build version of the individual genome file we'll work with.
+
+```{bash}
+#| eval: false
+wget -P $PRS_COMPUTATION https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS002729/ScoringFiles/Harmonized/PGS002729_hmPOS_GRCh38.txt.gz
+```
+
+## GIAB sample
+
+To calculate this score, we'll need the genotyping file from an individual. 
+
+We'll use the Genome In a Bottle HG001 (NA12878) sample.
+
+- download of latest version (v4.2.1)
+- GRCh38
+- VCF file
+- SNV, small indel and homozygous reference calls
+- VCF file used as a benchmark to SNV calls
+
+
+```{bash}
+#| eval: false
+
+# VCF
+wget -P $PRS_COMPUTATION https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/NA12878_HG001/latest/GRCh38/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz
+
+# Index
+wget -P $PRS_COMPUTATION https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/NA12878_HG001/latest/GRCh38/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi
+```
+
+# Data check
+
+Some base operations I do in the data. For the VCF:
+
+1. Checking how many calls are there (calls because there are both variants and REF/REF calls)
+
+```{bash}
+bcftools view -H $PRS_COMPUTATION/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz | wc -l
+```
+
+2. To see how many of homozygotes and heterozygotes we have:
+
+```{bash}
+bcftools query -f '[%GT]\n' $PRS_COMPUTATION/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz | sort | uniq -c
+```
+
+
+# Requirements {#sec-requirements}
 
